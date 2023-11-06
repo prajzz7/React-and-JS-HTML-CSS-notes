@@ -1,0 +1,360 @@
+JOINED : 27 SEPT 2021
+ONBOARDING FOR A MONTH
+TRAINING : NOV 2021 - MARCH 2022(6HRS WEEKDAY)(Java Springboot React Components)
+BENCH : MARCH 2022 - JULY 2022 
+PROJECT : AUGUST 2022 - MARCH 2023
+BENCH : APRIL 2023 - CURRENT
+ 
+PROJECT : WORKED ON A PROJECT WHERE THEY INSTALL SOLAR PANELS. THEY PROVIDE AND INSTALL SOLAR PANELS FOR CUSTOMERS. Power gazebo is their main product a gazebo with solar panels. Measurements are taken by the team  which visits the client's location does the site survey and then the client gets a quote on the website after logging in. To which after he accepts the installation process starts.Solar Panel installed with iot device. Then the data from the solar panels is stored in the database every 15 mins. And it is fetched and displayed on to the UI of the website. So the client can monitor their solar consumption. And it is displayed in the form of charts. Also on the website you have the history and the product information.
+I worked on the frontend part of it wheere the techstack was REACTJS. Made Login Signup, Profile, Products, Support Tickets, Graph Charts
+STATE MANAGEMENT: REDUX TOOLKIT
+
+
+---------------------- JAVASCRIPT ADVANCED -----------------------------
+
+
+1) CLOSURE : Closure helps in accessing the variables outside a nested function i.e outside its scope ecen after the execution of the outer functoin is completed. Clousre helps binding a function to its outer boundary. It can access variables from its lexical scope. A closure is created whenever a function is created. Closures remember the variable from its lexical scope which is the variable from its parent function
+
+2) CURRYING : Translating functions that takes multiple arguments into a sequence of functions that return functions taking in a single argument.
+
+3) THIS KEYWORD : This keyword always refers to the parentObject. The value of this keyword in global scope is window. Inside a function the value of this keyword is window because any variable and function declared globally is attached as properties and methods to window object. Inside a method the value is the parent object. for eg: var obj = { 
+				isSquare: true,
+				calculate_perimeter: function(){ console.log(this)}
+				//So here this will refer to the obj object and the value of console log is 				{ 
+				isSquare: true,
+				calculate_perimeter: function(){ console.log(this)}
+Now in DOM : button.addEventListener('click', function(){console.log(this)}
+		// Here this refers to the button or in general anything before addEventListener. So this 		   will return the button element
+
+Also if there is a method of an object which is nested inside another object, then this keyword inside the method will point to immediate parent object and not to the topmost parent.
+And arrow functions take this from surroundings. If there is an arrow function inside a regular function which is a method inside an object obj then the arrow function's this will point to this object obj. Because arrow functions take context of this from parent functions.
+Also when you pass a function as a reference to another function or setTimeout's callback then the context of this is lost to fix this you need to wrap the reference in a function and call it instead of passing reference. So when you call the function obj.func() then the 'this' keyword retains the context of object obj in this case because when you pass a reference of function to another function the context of this is not preserved and when you call a method instead of passing reference then the context is preserved. Or to preserve the context you can explicitly bind it using obj.func.bind(obj).
+So regular methods take their 'this' context from immediate parent object but arrow methods take their 'this' context from their surroundings as in a regular function which is non arrow function or global context.
+
+Now, some code for understanding this keyword:
+Below is code where calculator.read() reads user input and this.a saves the input as calulator's property since this references calculator(parent object).So this.a is calculator.a and you can access it inside any method of calculator.
+
+const calculator = {
+    read(){
+        this.a = +prompt('Value of a')
+        this.b = +prompt('Value of b')
+    },
+    multiply(){
+        return this.a*this.b
+    },
+    add(){
+        return this.a+this.b
+    }
+}
+
+calculator.read()
+console.log(calculator.multiply())
+console.log(calculator.add())
+
+
+ 
+4) HOISTING : Hoisting is a behaviour of moving all declarations to the top of the scope. If a function is called before definition then function is hoisted to the top of the scope and it still works. If var is defined later and used first it is hoisted to the top of scope and undefined is outputted. But let and const are hoisted but are sent to the temporal dead zones thus giving error. Temporal dead zone is an area where declarations are inaccessible until they are initialized.0
+
+5) let const var: 
+
+6) PROTOTYPE : Whenever we create a function Javascript engine adds a prototype property/object inside a function. Here we can attach methods and properties. So the object instances which we create using the functions constructor, they all inherit these properties and methods
+
+7) a) .map((curr_array_element, index, org_array)=>{}) : Used to loop through an array to transform each item and then returns a new array with the transformed values.
+   b) .filter((curr_array_element, index, org_arr)=>{}) : An array function to return the elemnts which satisfy a certain condition.
+   c) .reduce((accumulator, curr_element, index, org_array)=>{},initialvalue) : An array function which iterates over elements and  reduces the array to a single value.
+	
+8) IIFE: It is immediately invoked function expression which is executed immediately. To create private variables, help mitigate the global scope pollution. naming conflicts, unintentional variable reassignments etc var seeValue = (function (){
+	var private_val = 10;
+	
+	return {
+	    getter: function(){
+		    	console.log(private_val)
+		    }
+	    setter: function(val){
+			private_val = val
+		    }
+	}
+    })
+	Here you cant access private value directly you need getter and setters for it.
+
+
+9) SHADOWING: The inner scope variable with the same name as global or outer scope varaible will shadow the outer scope variable and have more priority as the inner scopes value will be printed. if we log in the inner scope.
+
+10) Shallow vs Deep Copy : Shallow copy copies the reference to the object so any changes made in either of the object will reflect in the other as well since both object have same reference . In a deep copy a new object is created entirely and changes made to either will not reflect in the other object.
+
+11) DEBOUNCING : Whenever a user starts typing in search bar and the stops for sometime then only the suggestions are given rather than giving suggestions on every keystroke.
+
+12) THROTTLING : Loads few more posts/data on scroll to give infinite scroll effect.
+
+13) Higher Order Functions : A function that accepts functios as arguments or returns a function
+
+14) Constructor Function : functions that have this keyword inside them and are called with new keyword. They are used becuase if you need multiple objects with the same properties and methods for eg: a song has genre, artist, filetype etc. So every song/elements will have these same properties with different or same values.
+
+15) First class functions : First class functions/citizens is nothing but manipulating functions or treating them as normal value like variables. That means assigning functions to variables, passing functions as arguments or returning functions inside a function makes them first class functions.
+
+16) new keyword : new keyword always creates a blank object. {}
+	person(age){
+		this.age = age
+	}
+	
+	const Person1 = new person(12)
+	
+	So think of a blank object in place of the this keyword so this keyword refers to the blank object 	that new created and loads the properties inside this object. So thats why its Person1.age
+
+17) Prototype : Prototype is a collection of built in functions and methods that are built in already so you can use on arrays and objects etc. for eg: obj.hasOwnProperty() so hasOwnProperty is predefined function which is a prototype. 
+
+18) Prototypal Inheritance: A child inherits properties from its parent.
+for eg: var parent = {canWalk: true}; var child = {canCrawl: true}; child.__proto__ = parent; Now child can access canWalk property of parent.
+
+19) functions vs methods : A function inside an object is a method otherwise its a function
+
+20) Call Apply Bind: All of them do the same thing bind the obj context to a function. SO you use it basically when you want a function's this to not point where it is curently pointing at but you want it to point to a particular object. For eg: 
+	a) in Call: function ShowAge(val1,val2,val3){ console.log(this, val1,val2,val3)}
+		    var obj = { age: 10 }
+		    showAge.call(obj,1,2,3)
+	b) in Apply : function ShowAge(val1,val2,val3){ console.log(this, val1,val2,val3)}
+		      var obj = { age: 10 }
+		      showAge.apply(obj,[1,2,3])
+			//Here the only difference is that apply only takes two arguments and call takes n 			number of arguments but parameters in Apply can be n number of parameters. And in 			both of them, the functions are executed
+	c) in Bind : function ShowAge(val1,val2,val3){ console.log(this, val1,val2,val3)}
+		     var obj = { age: 10 }
+		     var bindedFn = ShowAge.bind(obj)
+		     bindedFn()
+		     // Here in Bind, it returns a function that binds the function with object and doesnt 			call the function instead it just returns a binded Function. That you can call 				later. Notice that in Call and Apply it doesnt return a function instead calls the 			function right there. But in Bind it returns a function which you can call later. 			And so this keyword will point to the obj supplied as argument 						to .bind() .call() .apply()
+Also if you have arrow function and you use bind call and apply on them they wont point to the object that you are providing. Instead use regular functions they work properly with call apply and bind.
+
+21) Pure & Impure fns: Pure functions are those that dont change the value of global variable and that return same output everytime the same input is passed. If any of these is false then it is a impure function. function (a,b) {
+	return Math.random()*a*b
+}
+//This will give different outputs if function called with same inputs multiple times. So it is impure.
+
+21) Event Loop : Event loop is the constant process that javascript does to check the callback queue after the call stack is empty. So if a setTimeout or any other asynchronous function is encountered the setTImeout is placed in the callstack now web browser can execute setTimeout directly since setTImeout, fetch request etc are a part of the web browser. And the callback function in it is placed in the callback queue to be executed later. Now if the call stack gets empty the event loop checks the callback queue for functions and if there are callback functions then it places them on the callstack for execution.
+
+21) Execution Context: It is an environment that javascript creates, to execute the code and it tells you what variables and functions are available to use by creating a scope chain. Execution context are of two types. Global Execution Context (GEC) and Function Execution Context (FEC). GEC gets created when javscript code first starts to run and it represents global scope in javascript. A function execution context is created whenever a function is called and it has the funcition's local scope. It consists of two phases:
+	a) Creation phase: Javascript engine creates and environment. It determines the values for variables and functions and sets up the scope chain for the executino context. 
+	b) Execution phase: The code is executed in this phase.
+So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution.
+
+22) Generators:
+
+23) Difference await vs .then(): 
+
+24) Event bubbling: When any element in the DOM structure gets any event such as onClick etc. that event bubbles up to the top most element in the tree i.e the html tag. So if you trigger childs event the event bubbles up and it would also trigger the parents same event if you have an eventhandler for parent. So if child has click event it will trigger parents click event only since only click event is propagated to the top since child has click eventListener. So if parent has any other eventListener other than click that wouldnt be triggered. You can use event.stopPropagation() to stop bubbling up of the event.
+
+24) Event Propogation: 
+
+24) Synthetic Event: 
+
+24) Event Delegation: 
+
+25) Error Boundaries React: In react whenever something goes wrong, rather than showing a broken UI these Error boundaries are implemented to show a fallback UI to tell the user something is wrong. You make a component for the error boundary and wrap it onto other components if anything goes wrong in these components the error boundary will display a fallback UI to the user indicating what kind of an  error has taken place.
+
+26) Code splitting React: It is a way to optimize the web application's performance by diving the Javascript bundles. Dynamically loading components only when it is needed. So initial load time is significantly reduced. Using React.lazy to asynchronously import components and wrapping it in Suspense component to provide fallback UI until these components are loaded.
+
+27) Suspense
+28) Lazy Loading
+29) flux vs Redux vs Context
+
+30) Middleware : Middleware like thunk intercept actions and can perform certain tasks before those actions are being executed
+
+31) Event Delegation: Event delegation works upon the concept of event bubbling which is any event of an element goes up the dom tree to its parent and up to the highest level in dom tree i.e. html tag so event delegation means when any elemnt's event is handled by its parent or its ancestors on top of it in the tree.
+
+32) localstorage vs sessionstorage: Both of them are storage options which store data on the browser. And the 1st difference is the data in localstorage is stored permanently until you delete it explicitly so even if you close a tab and come back to it the data will still persist whereas in sessio storage if you close the tab and come back to it later then the data wouldn't be there it will be removed when you close the tab. Both these storages have around 5-10mb of data storage. Secondly, the localstorage data is still available in a different tab with the same url but in session storage even if it is the same url in a different tab the data wont be available.
+
+33) Objects assigned without data type liek let var etc are assigned to global scope.
+
+34) Priority between asynchronous functions: 
+
+
+---------------------All functions----------------------
+Array Methods:
+
+push()
+pop()
+shift()
+unshift()
+concat()
+join()
+slice()
+splice()
+map()
+filter()
+reduce()
+forEach()
+every()
+some()
+find()
+indexOf()
+lastIndexOf()
+sort()
+reverse()
+String Methods:
+
+charAt()
+charCodeAt()
+concat()
+indexOf()
+lastIndexOf()
+slice()
+substring()
+substr()
+toLowerCase()
+toUpperCase()
+trim()
+replace()
+split()
+match()
+search()
+Object Methods:
+
+hasOwnProperty()
+toString()
+valueOf()
+Function Methods:
+
+call()
+apply()
+bind()
+Math Methods:
+
+Math.abs()
+Math.ceil()
+Math.floor()
+Math.max()
+Math.min()
+Math.pow()
+Math.sqrt()
+Math.random()
+Date Methods:
+
+getDate()
+getDay()
+getMonth()
+getFullYear()
+getHours()
+getMinutes()
+getSeconds()
+getTime()
+setDate()
+setMonth()
+setFullYear()
+setHours()
+setMinutes()
+setSeconds()
+DOM Manipulation Methods:
+
+getElementById()
+querySelector()
+addEventListener()
+appendChild()
+removeChild()
+createElement()
+setAttribute()
+getAttribute()
+classList
+Async Methods (Promises):
+
+Promise.resolve()
+Promise.reject()
+Promise.all()
+then()
+catch()
+finally()
+AJAX Methods (XMLHttpRequest or Fetch API):
+
+fetch()
+XMLHttpRequest.open()
+XMLHttpRequest.send()
+XMLHttpRequest.onreadystatechange()
+JSON Methods:
+
+JSON.parse()
+JSON.stringify()
+Set and Map Methods:
+
+Set.add()
+Set.delete()
+Set.has()
+Map.set()
+Map.get()
+Map.delete()
+Regular Expression Methods:
+
+RegExp.test()
+RegExp.exec()
+
+------------- ASYNC JAVASCRIPT ----------------------------
+
+
+1) sync code in main stack and async code in side stack. Since JS is single thread only one task can be completed at a time. So JS completes main stack operations i.e. Sync code then after the main stack is empty the event loop checks if there is any async code in this side stack and if the result is ready to be executed. So it pushes this callback function in the main stack for execution. 
+
+var p1 = new Promise((resolve, reject)=>{
+	if(true){
+		resolve('Resolved')
+	}
+	else{
+		reject('Rejected')
+	}
+})
+
+p1.then()
+  .catch()
+
+---------------- VANILLA JAVASCRIPT DOM ----------------
+
+1)var element = document.getElementById
+2)document.getElementsByClassName('some-class-name')
+3)document.getElementsByTagName('li')
+4) var lastItem = document.querySelector('#list-group-item:last-Child');
+5) var secondItem = document.querySelector('.list-group-item:nth-child(2)');
+6) var odd_li_List = document.querySelectorAll('li:nth-child(odd)')
+document.querySelectorAll('input[type="text"]')
+
+element.innerHTML = ""
+element.innerText
+element.style.borderBottom
+element.textContent0
+
+element.parentNode.style.backgroundColor = '#f4f4f4'
+element.parentElement.style
+element.childNode[1] -> first element (but could give whitespaces too instead use .children)
+element.children[0] -> points first element
+element.firstElementChild
+element.lastElementChild
+eleement.nextElementSibling
+element.previousElementSibling
+
+var newDiv = document.createElement('div')
+newDiv.className = 'helloClass'
+newDiv.id = 'helloId'
+var newDivText = document.createNodeText('Hello wOrld')
+newDiv.appendChild(newDivText)
+var container = docyument.querySelector('header .container')
+var h1 = document.queryselector('header h1')
+container.insertBefore(newDiv, h1)
+
+var button = document.getElementbyId('btn')
+button.addEvenetListener('click', onButtonClick)
+function onButtonClick(){
+const genderRadio = document.querySelector("input[name='gender']:checked")
+element.appendChild(genderRadio)
+}
+
+.appendChild()  .removeChild()
+
+
+
+
+REACT 
+
+const emailReducer = (state, action) => {
+	if(action.type==='UPDATE_EMAIL'){
+		return { val: action.payload, isValid:true}
+}
+}
+
+CONST [emailState, dispatchEmail] = usereducer(emailreducer, defaultState)
+
+function onEmailChange(e){
+dispatchEmail({type:'UPDATE_EMAIL', payload: e.target.value})
+}

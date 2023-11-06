@@ -1,0 +1,12 @@
+********************---------------INTERVIEW NOT ANSWERED QUESTIONS---------------*********************
+
+1) inline block, block, inline
+2) Can I give width 100 to inline
+3) What is box sizing property in css?
+4) functional scope and block scope ? Answered but just confirm
+5) what is scope of var called ? I answered lexical scope
+6) position sticky
+7) WHAT IS ES6 and what are new introduced features
+8) HTML elements, what is HTML semantics, what are its benefits
+9) what is SEO, SEO tool to check SEO rating that helps make changes 
+10) What are new HTML 5 elements/semantics -> <header> footer nav section article main

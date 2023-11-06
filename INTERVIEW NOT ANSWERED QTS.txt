@@ -1,0 +1,10 @@
+********************---------------INTERVIEW NOT ANSWERED QUESTIONS---------------*********************
+
+1) inline block, block, inline
+2) Can I give width 100 to inline
+3) What is box sizing property in css?
+4) functional scope and block scope ? Answered but just confirm
+5) what is scope of var called ? I answered lexical scope. It is functional scope
+6) position sticky
+7) div + p{color:red}, div > p{color:red}
+8) What are the SEO tools for improving seo

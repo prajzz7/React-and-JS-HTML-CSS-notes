@@ -1,0 +1,89 @@
+React Components : Components in React are independent and reusable bits of code.Components manipulate data and render UI to the screen. They accept input called as props and return jsx code which is what needs to be displayed on the screen. Components in react can be made using two approaches Class Component and Functional Component.
+	Class Component: Class componenets extends React.Component which gives the classes access to React's functions for managinf props, state and event handling. It requires a render() method to return the jsx code which renders initially after the component is mounted and re-renders after every state change. These are stateful components. 
+	Functional Component: They use a different syntax but behave in the same way. Here we do not nee to use the render method to return the jsx code. Functional components are stateless components but we achieve statefullness using hooks.
+
+	These components use props to pass data from parent to child. Props are immutable. SUppose you want a card with user details to be displayed so you write a component for this and you can use it multiple times wherever you want.
+   
+
+Functions JS: Functions in JS are a block of statements that can be reused again to avoid writing same piece of code again and again. Multiple ways to define a fucntion. function declaration using function(){} keyword or function expression func = function someFunc(){} or arrow functions const func = ()=>{} or IIFE (function(){})();.Functions take in parameters. You need to call the function to execute it. And the function can return anything from itself back to the caller and thus if there is any code after the return statement that code wont be executed. A function can be called before its declaration because the entire function is hoisted to the top of its scope. But only function declarations are hoisted not function expressions and arrow functions since they are assigned to variables and only variable declarations are hoisted to the top of the scope and the assignment stays in place.
+
+
+
+
+
+
+
+
+
+React:
+	React is unidirectional data flow.(Parent to child data flow). Component based architecture(Use 	multiple components). Whenever there is a state change react compares its new dom with previous dom 	and checks for the changes(this process is called reconciliation). This changes it passes to the real 	dom thus saving Real DOM's unneccessary renders thus making it efficeient.
+
+1) Custom Hook: Encapsulate logic in a custom hook to share it in your components. Just like a function. So you dont have to write one code multiple times you write it in a custom hook and use that custom hook everywhere you need that logic.
+
+2) Server side rendering vs Client sdie : In client side the server sends an empty shell and the browser performs the render. But in server side rendering the server sends a rendered page thus we see fast loading of the page(the first page load) than client side rendering. Server side is used for data heavy apps like amazon flipkart where SEO performance is also important. And client side for outlook teams etc where SEO is not needed.
+
+3) React Fiber : Before React fiber the diffing algorithm (comparing virtual doms) used to compare in one go and block CPU tasks to perfom these tasks. After React Fiber it compares in fibers one by one and not in one go and also makes sure that user action are not blocked.
+
+4) Synthetic event: The event management that wes see on the website, that is handled by React itself and not the browser. The click event thats there is handled by react thatsw why its called synthetic event. And there are all APIs in synthetic event that are thee in normal apis like event.target etc. And since react handles these events and then passes it to the browser thats why there is similar event system across different browsers so you dont have to write different code for different browsers.
+
+5) Why were Hooks introducted: SO there is better code Reusability. For eg you can use custom hooks  to reuse state logic in multiple places. No boiler plate code like state for eg .this binding 
+
+6) Controlled vs uncontrolled component: Whenever you use Forms with state it is controlled and you extract data using the onChange handler and perform validations, there is no internal state for input since ref is not present. Whereas in uncontrolled it is reliable on dom to handle input and not state, you can extract the value of input using ref, here state is not managing the data but ref is present and input tag manages its internal state and not component state. Eg: If you use useRef which is uncontrolled, for a search field it will fetch values but wont re render the component, so you will have to manage a state to trigger a re render to change somethgin in UI or run a function on the re render.
+
+7) PRos and cons of class vs functional components react:  SO there is better code Reusability. For eg you can reuse state logic in multiple places. No boiler plate code like state for eg .this binding .
+
+8) React Middleware: A MIddleware intercepts and handles actions dispatched from the components. So, Redux Thunk is a middleware that enables you to create action creators that handle asynchronous operations, making it a powerful tool for managing side effects in Redux-based applications.  So you have action creators  to write asynchronous pieces of code since you shouldnt write it in the reducers and dispatch actions from inside these.We can dispatch actions fom components as well but We use middleware if we have api calls or any asynchronous code and according to that if we want to dispatch actions. 
+--Here's how it works step by step:
+You dispatch an action from your component, for example:
+dispatch(someAction());
+Before this action reaches the reducers, Redux Thunk (or other middleware) intercepts it.
+If the action is a plain object (for eg. {type: 'senddata', payload: val}), it passes it along to the reducers without modification.
+If the action is a function (as it is when you use Redux Thunk), the middleware executes this function, providing it with the dispatch and getState functions.
+Inside this function, you can perform asynchronous operations (e.g., API requests, timeouts, etc.).
+When those asynchronous operations are complete, you can dispatch one or more actual action objects (plain objects) from within this function.
+These dispatched action objects then continue through the middleware chain and reach the reducers, where they update the state.
+
+9) Stateful vs stateless with examples: Class are stateful since they have their own state. Functional componetns were stateless initially since they get data through props and props are read only and cannot manage their own state. But with the intro of hooks functional components cna also be stateful since state can be managed with the help of hooks.
+
+10) What are side effects in react exaplin with example: Anything that is not in the component or not affecting the component state is a side effect. state setState is not a sideEffect. But changing document.title, fetch api calls, subscribing to any service are side effect examples and they are preferrably written inside useEffect.
+
+11)When we save data in a state why is it lost after we refresh the page:
+Radio button value react
+12) Higher order components: The components that take other components as arguments and return a component. Used for code reusability
+
+13) useMemo: When you have a function in a component and you dont want that function to re render on every component re render then you use this useMemo. 
+const doubleNum = useMemo(()=>{
+	return slowFunction(number);
+},[number])
+
+  function slowFunction(num) {
+    for (let i = 0; i <= 1000000; i++) {} // Decreased the loop iterations
+    return num * 2;
+  }
+So when you use useMemo it has a dependency array which says that this useMemo callback will be executed only when the number dependency changes regardless of how many ever times the component re renders.
+
+14) useCallback: It is the same as useMemo. THe only difference is that in useMemo's callback we return a value and in useCallback we return the entire callback function to execute it at any later point in time.
+
+15) React.Memo:
+
+16) Lazy Loading:
+
+17) ~ and ^ symbol in package.json: 
+	"react": "^17.0.2" means npm install will install any package between 			17.0.2 and 18.0.0
+	"react": "~17.0.2" means npm install will install any package between 			17.0.2 and 17.9.0
+
+18) Reconciliation in React: 
+
+19) SEO optimization tools :
+
+20) Security in React: 
+
+21) Babel:
+
+22)Callback Hell:
+
+23)ES6 features
+
+24) Context vs redux
+
+25) useStrict mode:

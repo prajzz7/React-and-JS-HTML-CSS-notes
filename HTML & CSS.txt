@@ -1,0 +1,31 @@
+HTML
+
+1) meta tags : <meta> Helps in improving SEO
+2) html 5 semantics : <header> footer main section aside etc.
+3) Logical vs Physical tags : <strong> and <b> are smae they bold elements just like <em> and <i> text turns italic. The differenece is in semantics so anyone lookng at the code will know it is an important text since its wrapped in strong and <b> doesnt give much story about it. Also strong is good for SEO.
+4)iFrame : embed other website pages or videos on to your website with iframe src
+
+
+CSS 
+
+1) CSS specificity : div p { color : red} has specificity 2 because div 1 + p 1 = 2, p {color: red } has specificity 1, #id{ color: red} has specificity of 100, for class has 10
+2) box-sizing : It is a property for sizing a box or a container/element.
+		a) If its border box :- then if container has width 200px and if you give padding inside the 		container say 20px on left and right the total width of container will remain 200px. Since 		padding and border are included in this width
+		b) If it is content-box(even by default without box-sizing property it is content-box) :- 		then if container has width 200px and padding is given 20 px left right then total width of 		container become 240px
+3) CSS variables: They are defined starting with -- for eg: --bgcolor and used as background-color: var(--bgcolor). VAriables defined have scope they can be used in child element but not in parent element. 
+4) CSS selectors : div + p : + represents select immediate next sibling so selected p is sibling to d,
+   div ~ p : selects all sibling which is p
+   div > p : selects Direct children . So p is direct children of div then it will select not if p is nested in some other element which is child of div 
+
+5) CSS pseudo selectors : :hover, active, focus, div:not(.list) - select all elements in div except class list
+6) CSS pseudo elements : ::before, after , first-line,last-line, first-letter
+7) p tags cant have h1 as child it throws it out and makes it a sibling element in dom instead of child.
+8) Attribute selector : HTML : <ul> 
+				<li data-foodType='non-veg'>Pizza</li>
+				<li data-foodType='veg, non-veg'>Burger</li> 
+			     </ul>
+			CSS : ul li[data-foodType='non-veg']{ color: red }
+			      ul li[data-foodType]{ color: red }
+			      ul li[data-foodType^='veg']{ color: red } -> ^ means every attribute that 									     starts with veg
+			      ul li[data-foodType*='veg']{ color: red } -> * means every attribute that 									     contains veg
+									   $ means every attribute that 									     ends with veg
