@@ -128,7 +128,7 @@ Also if you have arrow function and you use bind call and apply on them they won
 }
 //This will give different outputs if function called with same inputs multiple times. So it is impure.
 
-21) Event Loop : Event loop is the constant process that javascript does to check the callback queue after the call stack is empty. So if a setTimeout or any other asynchronous function is encountered the setTImeout is placed in the callstack now web browser can execute setTimeout directly since setTImeout, fetch request etc are a part of the web browser. And the callback function in it is placed in the callback queue to be executed later. Now if the call stack gets empty the event loop checks the callback queue for functions and if there are callback functions then it places them on the callstack for execution.
+21) Event Loop : Event loop is the constant process that javascript does to check the callback queue after the call stack is empty. So if a setTimeout or any other asynchronous function is encountered the setTImeout is placed in the callstack now web browser can execute setTimeout directly since setTImeout, fetch request etc are a part of the web browser. And the callback function in it is placed in the callback queue to be executed later. Now if the call stack gets empty the event loop checks the callback queue for functions and if there are callback functions then it places them on the callstack for execution according to their priority i.e. Promise having higher priority would be executed first and then setTimeout or setInterval. Consequently, the Event Loop prioritizes completing all Micro tasks (Promises) in the queue before moving on to the next Macro task (like setTimeout), even if the delay specified in setTimeout is zero. This is the reason Promises are executed before setTimeout.
 
 21) Execution Context: It is an environment that javascript creates, to execute the code and it tells you what variables and functions are available to use by creating a scope chain. Execution context are of two types. Global Execution Context (GEC) and Function Execution Context (FEC). GEC gets created when javscript code first starts to run and it represents global scope in javascript. A function execution context is created whenever a function is called and it has the funcition's local scope. It consists of two phases:
 	a) Creation phase: Javascript engine creates and environment. It determines the values for variables and functions and sets up the scope chain for the executino context. 
@@ -286,7 +286,7 @@ RegExp.exec()
 ------------- ASYNC JAVASCRIPT ----------------------------
 
 
-1) sync code in main stack and async code in side stack. Since JS is single thread only one task can be completed at a time. So JS completes main stack operations i.e. Sync code then after the main stack is empty the event loop checks if there is any async code in this side stack and if the result is ready to be executed. So it pushes this callback function in the main stack for execution. 
+1) sync code in main stack and async code in callbackqueue. Since JS is single thread only one task can be completed at a time. So JS completes main stack operations i.e. Sync code then after the main stack is empty the event loop checks if there is any async code in this callback queue and if the result is ready to be executed. So it pushes this callback function in the main stack for execution. 
 
 var p1 = new Promise((resolve, reject)=>{
 	if(true){
@@ -299,6 +299,10 @@ var p1 = new Promise((resolve, reject)=>{
 
 p1.then()
   .catch()
+
+a) Promise.all : It returns a new promise that resolves when all promises are fulfilled, or rejects as soon as one promise rejects
+b) Promise.race: It returns a promise that settles as soon as one promise settles, whether it's fulfilled or rejected. This is useful when you're interested in the fastest promise
+c) Promise.allSettled: It returns a promise that settles when all promises have settled, regardless of whether they're fulfilled or rejected. This is beneficial when you need to know the outcome of all promises. The downside, however, is that you'll need additional processing to distinguish between the resolved and rejected promises, as Promise.allSettled doesn't inherently differentiate between the two.
 
 ---------------- VANILLA JAVASCRIPT DOM ----------------
 
