@@ -151,9 +151,7 @@ So whenever the code is executed for the first time a global execution context i
 
 26) Code splitting React: It is a way to optimize the web application's performance by diving the Javascript bundles. Dynamically loading components only when it is needed. So initial load time is significantly reduced. Using React.lazy to asynchronously import components and wrapping it in Suspense component to provide fallback UI until these components are loaded.
 
-27) Suspense
-28) Lazy Loading
-29) flux vs Redux vs Context
+
 
 30) Middleware : Middleware like thunk intercept actions and can perform certain tasks before those actions are being executed
 
@@ -163,7 +161,9 @@ So whenever the code is executed for the first time a global execution context i
 
 33) Objects assigned without data type liek let var etc are assigned to global scope.
 
-34) Priority between asynchronous functions: 
+34) Priority between asynchronous functions: Promise microTask has the highest priority then macro Task like setTimeout setInterval etc.
+
+35) Callback Hell:
 
 
 ---------------------All functions----------------------

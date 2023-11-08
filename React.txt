@@ -32,7 +32,7 @@ React:
 
 7) PRos and cons of class vs functional components react:  SO there is better code Reusability. For eg you can reuse state logic in multiple places. No boiler plate code like state for eg .this binding .
 
-8) React Middleware: A MIddleware intercepts and handles actions dispatched from the components. So, Redux Thunk is a middleware that enables you to create action creators that handle asynchronous operations, making it a powerful tool for managing side effects in Redux-based applications.  So you have action creators  to write asynchronous pieces of code since you shouldnt write it in the reducers and dispatch actions from inside these.We can dispatch actions fom components as well but We use middleware if we have api calls or any asynchronous code and according to that if we want to dispatch actions. 
+8) React Middleware: A MIddleware intercepts actions and can perform asynchronous tasks and handles actions dispatched from the components. So, Redux Thunk is a middleware that enables you to create action creators that handle asynchronous operations, making it a powerful tool for managing side effects in Redux-based applications.  So you have action creators  to write asynchronous pieces of code since you shouldnt write it in the reducers and dispatch actions from inside these.We can dispatch actions fom components as well but We use middleware if we have api calls or any asynchronous code and according to that if we want to dispatch actions. 
 --Here's how it works step by step:
 You dispatch an action from your component, for example:
 dispatch(someAction());
@@ -54,7 +54,7 @@ Radio button value react
 13) useMemo: When you have a function in a component and you dont want that function to re render on every component re render then you use this useMemo. 
 const doubleNum = useMemo(()=>{
 	return slowFunction(number);
-},[number])
+},[number]) 
 
   function slowFunction(num) {
     for (let i = 0; i <= 1000000; i++) {} // Decreased the loop iterations
@@ -74,7 +74,7 @@ So when you use useMemo it has a dependency array which says that this useMemo c
 
 18) Reconciliation in React: 
 
-19) SEO optimization tools :
+19) SEO optimization tools : React-snap
 
 20) Security in React: 
 
@@ -84,6 +84,9 @@ So when you use useMemo it has a dependency array which says that this useMemo c
 
 23)ES6 features
 
-24) Context vs redux
+24) Context vs redux : 
 
 25) useStrict mode:
+27) Suspense
+28) Lazy Loading
+29) flux vs Redux vs Context
