@@ -135,7 +135,7 @@ Also if you have arrow function and you use bind call and apply on them they won
 	b) Execution phase: The code is executed in this phase.
 So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution.
 
-22) Generators:
+22) Generators: 
 
 23) Difference await vs .then(): 
 
