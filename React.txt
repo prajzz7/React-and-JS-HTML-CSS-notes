@@ -90,3 +90,4 @@ So when you use useMemo it has a dependency array which says that this useMemo c
 27) Suspense
 28) Lazy Loading
 29) flux vs Redux vs Context
+30) How to Debug code in React:

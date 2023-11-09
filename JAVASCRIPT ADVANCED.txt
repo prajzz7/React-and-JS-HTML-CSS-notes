@@ -13,11 +13,21 @@ STATE MANAGEMENT: REDUX TOOLKIT
 ---------------------- JAVASCRIPT ADVANCED -----------------------------
 
 
-1) CLOSURE : Closure helps in accessing the variables outside a nested function i.e outside its scope ecen after the execution of the outer functoin is completed. Clousre helps binding a function to its outer boundary. It can access variables from its lexical scope. A closure is created whenever a function is created. Closures remember the variable from its lexical scope which is the variable from its parent function
+1) CLOSURE : Closure helps in accessing the variables outside a nested function i.e outside its scope even after the execution of the outer functoin is completed. Clousre helps binding a function to its outer boundary. It can access variables from its lexical scope. A closure is created whenever a function is created. Closures remember the variable from its lexical scope which is the variable from its parent function
 
 2) CURRYING : Translating functions that takes multiple arguments into a sequence of functions that return functions taking in a single argument.
 
-3) THIS KEYWORD : This keyword always refers to the parentObject. The value of this keyword in global scope is window. Inside a function the value of this keyword is window because any variable and function declared globally is attached as properties and methods to window object. Inside a method the value is the parent object. for eg: var obj = { 
+function curriedAdd(x){
+    return function(y){
+        return function(z){
+            return x+y +z
+        }
+    }
+}
+
+console.log(curriedAdd(1)(2)(3))
+
+3) THIS KEYWORD : This keyword always refers to the parentObject or this keyword refers to the object that is currently calling the function. eg: person.displayAge() so this keyword inside display age function will refer to person object since this is the object that is currently calling the function. The value of this keyword in global scope is window. Inside a function the value of this keyword is window because any variable and function declared globally is attached as properties and methods to window object. Inside a method the value is the parent object. for eg: var obj = { 
 				isSquare: true,
 				calculate_perimeter: function(){ console.log(this)}
 				//So here this will refer to the obj object and the value of console log is 				{ 
@@ -26,10 +36,63 @@ STATE MANAGEMENT: REDUX TOOLKIT
 Now in DOM : button.addEventListener('click', function(){console.log(this)}
 		// Here this refers to the button or in general anything before addEventListener. So this 		   will return the button element
 
-Also if there is a method of an object which is nested inside another object, then this keyword inside the method will point to immediate parent object and not to the topmost parent.
-And arrow functions take this from surroundings. If there is an arrow function inside a regular function which is a method inside an object obj then the arrow function's this will point to this object obj. Because arrow functions take context of this from parent functions.
-Also when you pass a function as a reference to another function or setTimeout's callback then the context of this is lost to fix this you need to wrap the reference in a function and call it instead of passing reference. So when you call the function obj.func() then the 'this' keyword retains the context of object obj in this case because when you pass a reference of function to another function the context of this is not preserved and when you call a method instead of passing reference then the context is preserved. Or to preserve the context you can explicitly bind it using obj.func.bind(obj).
-So regular methods take their 'this' context from immediate parent object but arrow methods take their 'this' context from their surroundings as in a regular function which is non arrow function or global context.
+Also if there is a method of an object and that object is nested inside another object, then this keyword inside the method will point to immediate parent object and not to the topmost parent object.
+And arrow functions take this from surrounding scope(lexical environment) i.e their parents function scope.So nested arrow functions scope will be same as its parent regular function's scope. If there is an arrow function inside a regular function which is a method inside an object obj then the arrow function's this will point to this object obj. Because arrow functions take context of this from parent functions.
+
+Also, 
+const name = 'Global'
+const obj = {
+    name: 'Praj',
+    fn: function outer(){
+        console.log(this.name)
+        function inner(){
+            console.log(this.name)
+            
+        }
+        inner()
+    }
+}
+obj.fn()
+
+//Output: 'Praj'
+	  'Global' //in non-strict mode
+	  undefined //in strict mode
+
+Here above, the inner function isnt called by an object like obj.fn() thus fn() gets context of this from obj object since its calling that function but inner() isnt called by any object so in non-strict mode the value of this would be window's and in strict mode value of this would be undefined.
+
+Also when you pass a function as a reference to another function or setTimeout's callback then the context of this is lost to fix this you need to wrap the reference in a function and call it instead of passing reference. So when you call the function obj.func() then the 'this' keyword retains the context of object obj in this case because when you pass a reference of function to another function the context of this is not preserved and that callback would be later executed as a standalone function and thus its context would be global or window in a browser and when you call a method instead of passing reference then the context is preserved. Or to preserve the context you can explicitly bind it using obj.func.bind(obj).
+So regular methods take their 'this' context from immediate parent object but arrow methods take their 'this' context from their surroundings/ lexical scope i.e the parent function if it is nested or global/window if its not nested.
+
+global.name = 'Global'
+const obj = {
+    name: 'Praj',
+    fn: function outer() {
+        console.log(this.name);
+        function inner() {
+            console.log(this.name); // 'this' is not the same as in outer
+        }
+        inner()
+        setTimeout(inner, 1000);
+    }
+};
+
+obj.fn();
+
+The this.name inside inner would be undefined since inner is passed as reference to setTimeout. So to fix that you modify the code as 
+global.name = 'Global'
+const obj = {
+    name: 'Praj',
+    fn: function outer() {
+        console.log(this.name);
+        function inner() {
+            console.log(this.name); // 'this' is not the same as in outer
+        }
+        inner()
+        setTimeout(()=>{inner()}, 1000);
+    }
+};
+
+obj.fn();
 
 Now, some code for understanding this keyword:
 Below is code where calculator.read() reads user input and this.a saves the input as calulator's property since this references calculator(parent object).So this.a is calculator.a and you can access it inside any method of calculator.
@@ -53,9 +116,24 @@ console.log(calculator.add())
 
 
  
-4) HOISTING : Hoisting is a behaviour of moving all declarations to the top of the scope. If a function is called before definition then function is hoisted to the top of the scope and it still works. If var is defined later and used first it is hoisted to the top of scope and undefined is outputted. But let and const are hoisted but are sent to the temporal dead zones thus giving error. Temporal dead zone is an area where declarations are inaccessible until they are initialized.0
+4) HOISTING : Hoisting is a behaviour of moving all declarations to the top of the scope. If a function is called before definition then function is hoisted to the top of the scope and it still works. If var is defined later and used first it is hoisted to the top of scope and undefined is outputted. But let and const are hoisted but are sent to the temporal dead zones thus giving error. Temporal dead zone is an area where declarations are inaccessible until they are initialized. Only declarations are hoisted and value assignments are not hoisted. Thats why regular functions can be called before declaration and not arrow functions since you assign arrow functions to variables.
 
-5) let const var: 
+5) let const var: var is hoisted so are let and const but let and const are sent to temporal dead zones. Now the TEMPORAL DEAD ZONE(TDZ) is a concept in JS, so it is the time between the start of the scope and the point where variable is declared, but before its initialized with a value.
+console.log(x); // ReferenceError: x is not defined
+
+let x = 10;
+In this example, attempting to log the value of x before its declaration results in a ReferenceError. This is because there is a temporal dead zone for the variable x from the start of the scope until the actual declaration (let x = 10;). During the dead zone, accessing the variable leads to an error. In simple language, var can be accessed before decleration but value will be undefined since only declarations are hoisted and not assignments and let and const will give Reference error if accessed before declaring.
+
+var is functional scope, let and const are block scope.
+
+var and let can be declared and assigned a value and then re-assigned later. const can only be initialezed/assigned a value during declaration you cannot write 
+const a;
+const a =1; 
+This is not allowed.
+const a =1 
+This is allowed.
+Also you cant re assign values to const.
+
 
 6) PROTOTYPE : Whenever we create a function Javascript engine adds a prototype property/object inside a function. Here we can attach methods and properties. So the object instances which we create using the functions constructor, they all inherit these properties and methods
 
@@ -69,7 +147,7 @@ console.log(calculator.add())
 	return {
 	    getter: function(){
 		    	console.log(private_val)
-		    }
+		    },
 	    setter: function(val){
 			private_val = val
 		    }
@@ -82,11 +160,56 @@ console.log(calculator.add())
 
 10) Shallow vs Deep Copy : Shallow copy copies the reference to the object so any changes made in either of the object will reflect in the other as well since both object have same reference . In a deep copy a new object is created entirely and changes made to either will not reflect in the other object.
 
+// Deep copy example
+const originalObject = {
+  name: 'John',
+  age: 30,
+  address: {
+    city: 'New York',
+    country: 'USA'
+  }
+};
+
+const deepCopy = JSON.parse(JSON.stringify(originalObject));
+// Modify the nested object in the deep copy
+deepCopy.address.city = 'Mumbai';
+console.log(originalObject.address.city); // Output: San Francisco
+
+Here since it is a deep copy even the nested object's value didnt change.
+
+But if you use 
+const deepCopy = {...originalObject};
+in the above code this will only make a duplicate of the topmost element and the nested object will be still passed as a reference.
+
+//Shallow copy example
+const shallowCopy = originalObject
+Here the reference is passed of all nested and top level elements.
+
 11) DEBOUNCING : Whenever a user starts typing in search bar and the stops for sometime then only the suggestions are given rather than giving suggestions on every keystroke.
+
+export default function App() {
+  const [input, setInput] = useState('');
+  useEffect(() => {
+    const timerId = setTimeout(()=>{
+      console.log(input)
+    },500)
+    return ()=>clearTimeout(timerId)
+  }, [input]);
+
+  return (
+    <div className="App">
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+    </div>
+  );
+}
 
 12) THROTTLING : Loads few more posts/data on scroll to give infinite scroll effect.
 
-13) Higher Order Functions : A function that accepts functios as arguments or returns a function
+13) Higher Order Functions : A function that accepts functions as arguments or returns a function
 
 14) Constructor Function : functions that have this keyword inside them and are called with new keyword. They are used becuase if you need multiple objects with the same properties and methods for eg: a song has genre, artist, filetype etc. So every song/elements will have these same properties with different or same values.
 
@@ -164,6 +287,21 @@ So whenever the code is executed for the first time a global execution context i
 34) Priority between asynchronous functions: Promise microTask has the highest priority then macro Task like setTimeout setInterval etc.
 
 35) Callback Hell:
+
+36) Destructuring nested object:
+ const { name, age, address: { city, country, zip = "12345" } } = person;
+
+37) Destructuring an array:
+// Example nested array
+const numbers = [1, [2, 3], 4, 5];
+
+// Destructuring the nested array
+const [first, [second, third], fourth, fifth] = numbers;
+
+38) function's closure scope when it is a method 
+
+39) When to use arrow vs regular fn:
+
 
 
 ---------------------All functions----------------------
