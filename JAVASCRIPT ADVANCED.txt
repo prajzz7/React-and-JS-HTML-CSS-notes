@@ -302,6 +302,24 @@ const [first, [second, third], fourth, fifth] = numbers;
 
 39) When to use arrow vs regular fn:
 
+40) Why use Constructor functions: Constructor functions in JavaScript are used to create objects based on a specific blueprint or template. They are a way to define and initialize objects with a specific structure and behavior.
+eg:
+function movie(name, genre){
+    this.name = name
+    this.genre = genre
+    this.play = function(){
+        return this.name + ' from ' + this.genre +' genre is playing'
+    }
+}
+
+const dil_chahta_hai = new movie('Dil Chahta hai', 'drama')
+const rang_de_basanti = new movie('Rang De Basanti', 'thriller')
+
+console.log(dil_chahta_hai.name)
+console.log(rang_de_basanti.play())
+
+
+
 
 
 ---------------------All functions----------------------
