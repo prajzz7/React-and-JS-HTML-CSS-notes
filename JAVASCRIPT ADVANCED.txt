@@ -211,7 +211,23 @@ export default function App() {
 
 13) Higher Order Functions : A function that accepts functions as arguments or returns a function
 
-14) Constructor Function : functions that have this keyword inside them and are called with new keyword. They are used becuase if you need multiple objects with the same properties and methods for eg: a song has genre, artist, filetype etc. So every song/elements will have these same properties with different or same values.
+14) Constructor Function : Constructor functions in JavaScript are used to create objects based on a specific blueprint or template. They are a way to define and initialize objects with a specific structure and behavior.
+eg:
+function movie(name, genre){
+    this.name = name
+    this.genre = genre
+    this.play = function(){
+        return this.name + ' from ' + this.genre +' genre is playing'
+    }
+}
+
+const dil_chahta_hai = new movie('Dil Chahta hai', 'drama')
+const rang_de_basanti = new movie('Rang De Basanti', 'thriller')
+
+console.log(dil_chahta_hai.name)
+console.log(rang_de_basanti.play())
+
+Constructor functions are functions that have this keyword inside them and are called with new keyword. They are used becuase if you need multiple objects with the same properties and methods for eg: a song has genre, artist, filetype etc. So every song/elements will have these same properties with different or same values.
 
 15) First class functions : First class functions/citizens is nothing but manipulating functions or treating them as normal value like variables. That means assigning functions to variables, passing functions as arguments or returning functions inside a function makes them first class functions.
 
@@ -222,7 +238,7 @@ export default function App() {
 	
 	const Person1 = new person(12)
 	
-	So think of a blank object in place of the this keyword so this keyword refers to the blank object 	that new created and loads the properties inside this object. So thats why its Person1.age
+	So think of a blank object in place of the this keyword so this keyword refers to the blank object 	that new created and loads the properties inside this object. So thats why its Person1.age. And you get a new object with the properties and methods in Person1 now.
 
 17) Prototype : Prototype is a collection of built in functions and methods that are built in already so you can use on arrays and objects etc. for eg: obj.hasOwnProperty() so hasOwnProperty is predefined function which is a prototype. 
 
@@ -302,21 +318,7 @@ const [first, [second, third], fourth, fifth] = numbers;
 
 39) When to use arrow vs regular fn:
 
-40) Why use Constructor functions: Constructor functions in JavaScript are used to create objects based on a specific blueprint or template. They are a way to define and initialize objects with a specific structure and behavior.
-eg:
-function movie(name, genre){
-    this.name = name
-    this.genre = genre
-    this.play = function(){
-        return this.name + ' from ' + this.genre +' genre is playing'
-    }
-}
-
-const dil_chahta_hai = new movie('Dil Chahta hai', 'drama')
-const rang_de_basanti = new movie('Rang De Basanti', 'thriller')
-
-console.log(dil_chahta_hai.name)
-console.log(rang_de_basanti.play())
+40) Why use Constructor functions: 
 
 
 
