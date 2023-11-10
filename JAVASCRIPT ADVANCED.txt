@@ -262,17 +262,66 @@ for eg: var parent = {canWalk: true}; var child = {canCrawl: true}; child.__prot
 		     // Here in Bind, it returns a function that binds the function with object and doesnt 			call the function instead it just returns a binded Function. That you can call 				later. Notice that in Call and Apply it doesnt return a function instead calls the 			function right there. But in Bind it returns a function which you can call later. 			And so this keyword will point to the obj supplied as argument 						to .bind() .call() .apply()
 Also if you have arrow function and you use bind call and apply on them they wont point to the object that you are providing. Instead use regular functions they work properly with call apply and bind.
 
-21) Pure & Impure fns: Pure functions are those that dont change the value of global variable and that return same output everytime the same input is passed. If any of these is false then it is a impure function. function (a,b) {
+21) Pure & Impure fns: Pure functions are those that dont change the value of global variable and that return same output everytime the same input is passed. Anything that has side effects is impure. If any of these is false then it is a impure function. function (a,b) {
 	return Math.random()*a*b
 }
 //This will give different outputs if function called with same inputs multiple times. So it is impure.
 
-21) Event Loop : Event loop is the constant process that javascript does to check the callback queue after the call stack is empty. So if a setTimeout or any other asynchronous function is encountered the setTImeout is placed in the callstack now web browser can execute setTimeout directly since setTImeout, fetch request etc are a part of the web browser. And the callback function in it is placed in the callback queue to be executed later. Now if the call stack gets empty the event loop checks the callback queue for functions and if there are callback functions then it places them on the callstack for execution according to their priority i.e. Promise having higher priority would be executed first and then setTimeout or setInterval. Consequently, the Event Loop prioritizes completing all Micro tasks (Promises) in the queue before moving on to the next Macro task (like setTimeout), even if the delay specified in setTimeout is zero. This is the reason Promises are executed before setTimeout.
+Eg of Non-Side Effects a.k.a. Pure function:
+a)function add(a, b) {
+  return a + b;
+}
+const result = add(3, 4); // Non-side effect: Pure function call
+
+b)function calculateTotal(price, quantity) {
+  const total = price * quantity; // Non-side effect: Local variable manipulation
+  return total;
+}
+
+c)const data = [1, 2, 3, 4];
+const sum = data.reduce((accumulator, current) => accumulator + current, 0); // Non-side effect: Read-only operation
+
+d)function MyComponent(props) {
+  // Non-side effect: Rendering a component
+  return <div>{props.message}</div>;
+}
+
+
+
+Eg of side effects a.k.a. Impure fucntions:
+a)function logMessage(message) {
+  console.log(message);
+}
+
+b)function getCurrentTime() {
+  return new Date();
+}
+
+c) fetch('https://api.example.com/data')
+  .then(response => response.json())
+  .then(data => {
+    // Side effect: Data fetched from the network
+    console.log(data);
+  });
+
+d)const button = document.getElementById('myButton');
+button.addEventListener('click', () => {
+  // Side effect: Modifying the DOM
+  document.getElementById('output').textContent = 'Button clicked!';
+});
+
+e)setTimeout(() => {
+  // Side effect: Function executed after a delay
+  console.log('Delayed action');
+}, 2000);
+
+
+21) Event Loop : Event loop is the constant process that javascript does to check the callback queue after the call stack is empty. So if a setTimeout or any other asynchronous function is encountered the setTImeout is placed in the callstack now web browser can execute setTimeout directly since setTImeout, fetch request etc are a part of the web browser. And the callback function in it is placed in the callback queue to be executed later. Now if the call stack gets empty the event loop checks the callback queue for functions and if there are callback functions then it places them on the callstack for execution according to their priority i.e. Promise having higher priority would be executed first and then setTimeout or setInterval. Consequently, the Event Loop prioritizes completing all Micro tasks (Promises) in the queue before moving on to the next Macro task (like setTimeout), even if the delay specified in setTimeout is zero. This is the reason Promises are executed before setTimeout. SO promises are in microTask queue and setTimeout are in callback queue.
 
 21) Execution Context: It is an environment that javascript creates, to execute the code and it tells you what variables and functions are available to use by creating a scope chain. Execution context are of two types. Global Execution Context (GEC) and Function Execution Context (FEC). GEC gets created when javscript code first starts to run and it represents global scope in javascript. A function execution context is created whenever a function is called and it has the funcition's local scope. It consists of two phases:
-	a) Creation phase: Javascript engine creates and environment. It determines the values for variables and functions and sets up the scope chain for the executino context. 
+	a) Creation phase: Javascript engine creates an environment. It determines the values for variables and functions and sets up the scope chain for the execution context. 
 	b) Execution phase: The code is executed in this phase.
-So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution.
+So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution in frames.
 
 22) Generators: 
 
