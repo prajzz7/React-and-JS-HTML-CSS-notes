@@ -358,7 +358,7 @@ Here the third parameter if it is true then it says that event will be executed 
 
 24) Synthetic Event: 
 
-24) Event Delegation: 
+
 
 25) Error Boundaries React: In react whenever something goes wrong, rather than showing a broken UI these Error boundaries are implemented to show a fallback UI to tell the user something is wrong. You make a component for the error boundary and wrap it onto other components if anything goes wrong in these components the error boundary will display a fallback UI to the user indicating what kind of an  error has taken place.
 
@@ -368,11 +368,28 @@ Here the third parameter if it is true then it says that event will be executed 
 
 30) Middleware : Middleware like thunk intercept actions and can perform certain tasks before those actions are being executed
 
-31) Event Delegation: Event delegation works upon the concept of event bubbling which is any event of an element goes up the dom tree to its parent and up to the highest level in dom tree i.e. html tag so event delegation means when any elemnt's event is handled by its parent or its ancestors on top of it in the tree.
+31) Event Delegation: Event delegation is a technique in JavaScript that allows you to manage and handle events more efficiently by attaching a single event listener to a common ancestor of multiple elements, rather than attaching individual event listeners to each of those elements. This is particularly useful when you have a large number of elements that need the same type of event handling, such as click or change events.
+
+eg:
+<ul id="itemList">
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+
+const itemList = document.getElementById("itemList");
+
+itemList.addEventListener("click", function (event) {
+  if (event.target.tagName === "LI") {
+    // The event occurred on an <li> element.
+    console.log(`Clicked on ${event.target.textContent}`);
+  }
+});
+In this example, the click event is delegated to the ul element, and the event target is checked to ensure that the click occurred on an li element. This allows you to handle click events on any new li elements added to the list without attaching individual event listeners to each one.
 
 32) localstorage vs sessionstorage: Both of them are storage options which store data on the browser. And the 1st difference is the data in localstorage is stored permanently until you delete it explicitly so even if you close a tab and come back to it the data will still persist whereas in sessio storage if you close the tab and come back to it later then the data wouldn't be there it will be removed when you close the tab. Both these storages have around 5-10mb of data storage. Secondly, the localstorage data is still available in a different tab with the same url but in session storage even if it is the same url in a different tab the data wont be available.
 
-33) Objects assigned without data type liek let var etc are assigned to global scope.
+33) Objects assigned without data type like let var etc are assigned to global scope.
 
 34) Priority between asynchronous functions: Promise microTask has the highest priority then macro Task like setTimeout setInterval etc.
 
@@ -387,6 +404,13 @@ const numbers = [1, [2, 3], 4, 5];
 
 // Destructuring the nested array
 const [first, [second, third], fourth, fifth] = numbers;
+
+eg:
+var arr = [1,2,3,[4,5,[6,7],8],9,10]
+
+const [,,,[,,[,c]]] = arr
+console.log(c) 
+//Output 7
 
 38) function's closure scope when it is a method 
 
