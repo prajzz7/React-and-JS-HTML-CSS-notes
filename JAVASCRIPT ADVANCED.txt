@@ -321,7 +321,7 @@ e)setTimeout(() => {
 21) Execution Context: It is an environment that javascript creates, to execute the code and it tells you what variables and functions are available to use by creating a scope chain. Execution context are of two types. Global Execution Context (GEC) and Function Execution Context (FEC). GEC gets created when javscript code first starts to run and it represents global scope in javascript. A function execution context is created whenever a function is called and it has the funcition's local scope. It consists of two phases:
 	a) Creation phase: Javascript engine creates an environment. It determines the values for variables and functions and sets up the scope chain for the execution context. 
 	b) Execution phase: The code is executed in this phase.
-So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution in frames.
+So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution in frames. The call stack operates in a Last-In-First-Out (LIFO) manner. The function at the top of the call stack is the one currently being executed. When a function completes its execution, its context is popped from the stack, and control returns to the previous context.
 
 22) Generators: 
 
@@ -329,7 +329,32 @@ So whenever the code is executed for the first time a global execution context i
 
 24) Event bubbling: When any element in the DOM structure gets any event such as onClick etc. that event bubbles up to the top most element in the tree i.e the html tag. So if you trigger childs event the event bubbles up and it would also trigger the parents same event if you have an eventhandler for parent. So if child has click event it will trigger parents click event only since only click event is propagated to the top since child has click eventListener. So if parent has any other eventListener other than click that wouldnt be triggered. You can use event.stopPropagation() to stop bubbling up of the event.
 
-24) Event Propogation: 
+24) Event Propogation: Event propagatoin is just like event bubbling. Evenet bubbling keeps executing eventListeners from target element to root element. Event propagation executes eventListeners from root to target. 
+
+Eg: FOR UNDERSTANDING 23) and 24) 
+//HTML 
+<div id='grand'>
+  <div id="outer">
+    <button id="inner">Click me</button>
+  </div>
+</div>
+
+//JS
+document.getElementById("inner").addEventListener("click", function() {
+  console.log("Inner clicked");
+}, true); // Bubbling phase
+document.getElementById("outer").addEventListener("click", function() {
+  console.log("Outer clicked");
+}, true); // Capturing phase
+
+document.getElementById("grand").addEventListener("click", function() {
+  console.log("Grand clicked");
+}, false);
+
+
+Here the third parameter if it is true then it says that event will be executed during event propagation and if it is false that event will execute during event bubbling. So first event propagation takes place i.e. from root to target. So if I click on Click me button then javascript will go to the top of the tree on root see which eventListeners have true as their third parameter and start executing all those events which have the 3rd parameter true in the order of root to target(Click me button) and skip(not execute) all the events with false in 3rd parameter. Now after this event bubbling will take place and all eventListeners with false(which is false byDefault even if you skip writing the third parameter) as their third parameter will start executing from target to root and skip all eventListerners who have true as their 3rd parameter. So event propagation  takes place first and then event bubbling.
+
+
 
 24) Synthetic Event: 
 
