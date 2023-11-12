@@ -387,7 +387,7 @@ itemList.addEventListener("click", function (event) {
 });
 In this example, the click event is delegated to the ul element, and the event target is checked to ensure that the click occurred on an li element. This allows you to handle click events on any new li elements added to the list without attaching individual event listeners to each one.
 
-32) localstorage vs sessionstorage: Both of them are storage options which store data on the browser. And the 1st difference is the data in localstorage is stored permanently until you delete it explicitly so even if you close a tab and come back to it the data will still persist whereas in sessio storage if you close the tab and come back to it later then the data wouldn't be there it will be removed when you close the tab. Both these storages have around 5-10mb of data storage. Secondly, the localstorage data is still available in a different tab with the same url but in session storage even if it is the same url in a different tab the data wont be available.
+32) localstorage vs sessionstorage: Both of them are storage options which store data on the browser. And the 1st difference is the data in localstorage is stored permanently until you delete it explicitly so even if you close a tab and come back to it the data will still persist whereas in session storage if you close the tab and come back to it later then the data wouldn't be there it will be removed when you close the tab. Both these storages have around 5-10mb of data storage. Secondly, the localstorage data is still available in a different tab with the same url but in session storage even if it is the same url in a different tab the data wont be available.
 
 33) Objects assigned without data type like let var etc are assigned to global scope.
 
@@ -398,7 +398,7 @@ In this example, the click event is delegated to the ul element, and the event t
 36) Destructuring nested object:
  const { name, age, address: { city, country, zip = "12345" } } = person;
 
-37) Destructuring an array:
+37) Destructuring an array: 
 // Example nested array
 const numbers = [1, [2, 3], 4, 5];
 
@@ -416,7 +416,7 @@ console.log(c)
 
 39) When to use arrow vs regular fn:
 
-40) Why use Constructor functions: 
+40) Why use Constructor functions: We use constructor function when we need multiple objects to have same properties or methods. 
 
 
 
@@ -556,7 +556,7 @@ var p1 = new Promise((resolve, reject)=>{
 p1.then()
   .catch()
 
-a) Promise.all : It returns a new promise that resolves when all promises are fulfilled, or rejects as soon as one promise rejects
+a) Promise.all : It returns a new promise that resolves when all promises are fulfilled, or rejects as soon as one promise rejects. If any of the promises in the array rejects (fails), the entire Promise.all call will reject, and you won't get the results of the other promises.
 b) Promise.race: It returns a promise that settles as soon as one promise settles, whether it's fulfilled or rejected. This is useful when you're interested in the fastest promise
 c) Promise.allSettled: It returns a promise that settles when all promises have settled, regardless of whether they're fulfilled or rejected. This is beneficial when you need to know the outcome of all promises. The downside, however, is that you'll need additional processing to distinguish between the resolved and rejected promises, as Promise.allSettled doesn't inherently differentiate between the two.
 
