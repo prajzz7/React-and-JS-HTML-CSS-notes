@@ -1,6 +1,6 @@
 React Components : Components in React are independent and reusable bits of code.Components manipulate data and render UI to the screen. They accept input called as props and return jsx code which is what needs to be displayed on the screen. Components in react can be made using two approaches Class Component and Functional Component.
-	Class Component: Class componenets extends React.Component which gives the classes access to React's functions for managinf props, state and event handling. It requires a render() method to return the jsx code which renders initially after the component is mounted and re-renders after every state change. These are stateful components. 
-	Functional Component: They use a different syntax but behave in the same way. Here we do not nee to use the render method to return the jsx code. Functional components are stateless components but we achieve statefullness using hooks.
+	Class Component: Class componenets extends React.Component which gives the classes access to React's functions for managing props, state and event handling. It requires a render() method to return the jsx code which renders initially after the component is mounted and re-renders after every state change. These are stateful components. 
+	Functional Component: They use a different syntax but behave in the same way. Here we do not need to use the render method to return the jsx code. Functional components are stateless components but we achieve statefullness using hooks.
 
 	These components use props to pass data from parent to child. Props are immutable. SUppose you want a card with user details to be displayed so you write a component for this and you can use it multiple times wherever you want.
    
