@@ -20,7 +20,7 @@ React:
 
 1) Custom Hook: Encapsulate logic in a custom hook to share it in your components. Just like a function. So you dont have to write one code multiple times you write it in a custom hook and use that custom hook everywhere you need that logic.
 
-2) Server side rendering vs Client sdie : In client side the server sends an empty shell and the browser performs the render. But in server side rendering the server sends a rendered page thus we see fast loading of the page(the first page load) than client side rendering. Server side is used for data heavy apps like amazon flipkart where SEO performance is also important. And client side for outlook teams etc where SEO is not needed.
+2) Server side rendering vs Client side : In client side the server sends an empty shell and the browser performs the render. But in server side rendering the server sends a rendered page thus we see fast loading of the page(the first page load) than client side rendering. Server side is used for data heavy apps like amazon flipkart where SEO performance is also important. And client side for outlook teams etc where SEO is not needed. 
 
 3) React Fiber : Before React fiber the diffing algorithm (comparing virtual doms) used to compare in one go and block CPU tasks to perfom these tasks. After React Fiber it compares in fibers one by one and not in one go and also makes sure that user action are not blocked.
 
@@ -43,15 +43,18 @@ Inside this function, you can perform asynchronous operations (e.g., API request
 When those asynchronous operations are complete, you can dispatch one or more actual action objects (plain objects) from within this function.
 These dispatched action objects then continue through the middleware chain and reach the reducers, where they update the state.
 
-9) Stateful vs stateless with examples: Class are stateful since they have their own state. Functional componetns were stateless initially since they get data through props and props are read only and cannot manage their own state. But with the intro of hooks functional components cna also be stateful since state can be managed with the help of hooks.
+9) Stateful vs stateless with examples: Class are stateful since they have their own state. Functional components were stateless initially since they get data through props and props are read only and cannot manage their own state. But with the intro of hooks functional components cna also be stateful since state can be managed with the help of hooks.
 
-10) What are side effects in react exaplin with example: Anything that is not in the component or not affecting the component state is a side effect. state setState is not a sideEffect. But changing document.title, fetch api calls, subscribing to any service are side effect examples and they are preferrably written inside useEffect.
+10) What are side effects in react explain with example: Anything that is not in the component or not affecting the component state is a side effect. state setState is not a sideEffect. But changing document.title, fetch api calls, subscribing to any service are side effect examples and they are preferrably written inside useEffect.
 
-11)When we save data in a state why is it lost after we refresh the page:
+11)When we save data in a state why is it lost after we refresh the page: The state data is stored in memory within the browser's JavaScript runtime environment.
+This storage is volatile, meaning it is cleared when the page is refreshed
+
+
 Radio button value react
 12) Higher order components: The components that take other components as arguments and return a component. Used for code reusability
 
-13) useMemo: When you have a function in a component and you dont want that function to re render on every component re render then you use this useMemo. 
+13) useMemo: When you have a function in a component and you dont want that function to re render on every component re render then you use this useMemo. Also the function that you pass in useMemo is cached so the next time the component re renders useMemo will check if the value is changed or not, if its not changed then it will return the value from the cached function instantaneously without actually running the function since the value was cached and otherwise if the value is changed the function in useMemo will be executed normally with howmuchever time it takes.
 const doubleNum = useMemo(()=>{
 	return slowFunction(number);
 },[number]) 
@@ -62,11 +65,29 @@ const doubleNum = useMemo(()=>{
   }
 So when you use useMemo it has a dependency array which says that this useMemo callback will be executed only when the number dependency changes regardless of how many ever times the component re renders.
 
-14) useCallback: It is the same as useMemo. THe only difference is that in useMemo's callback we return a value and in useCallback we return the entire callback function to execute it at any later point in time.
+Also suppose you have an object
+const themeStyle ={bgColor: dark?'black':'white'}
+useEffect(()=>{
+	console.log('Theme changed')
+},[themeStyle])
 
-15) React.Memo:
+And you want to console.log('Theme changed') used  in useEffect wheneever user clicks on Change theme button which setStates the theme to the opposite i.e. if its white then turn dark if its dark then turn white. So if you have another separate function that re renders the component this theme styles object will get created again since the component re-rendered so this code will run and since themeStyle is an object so it is a non-primitve/refrential value so it will be a new object on a re-render since it will reference a new memory location now, and thus it will console.log even if the theme hasnt changed since we passed themeStyle object in useEffects dependecy. So you use useMemo in this case to show the component that even if you have re rendered the themeStyles value is still same and not explicitly changed so you wrap this themeStyle object with useMemo. note that if themeStyle would use String, number or an primitive value it would be the same as previous render and wouldnt need useMemo since primitive value are same and do not change on re renders like non primitve values as they have a new reference everytime the y are created even if the object is same. So now the code will look like,
+const themeStyle = useMemo(()=>{
+	return {
+		bgColor: dark?'black':'white'
+		}
+},[dark])
+useEffect(()=>{
+	console.log('Theme changed')
+},[themeStyle])
 
-16) Lazy Loading:
+
+
+14) useCallback: It is the same as useMemo. THe only difference is that in useMemo's callback we return a value and in useCallback we return the entire callback function to execute it at any later point in time. So if we want to use that particuklar function somewhere else or pass it as props to another component we ll use useCallback and if we just want the value we use useMemo like in the above example in 13)useMemo's example we are returning just the object to themeStyles but if we would have used useCallback there instead of useMemo we would have a function in themeStyles instead of just the object. 
+
+15) React.Memo: React.memo is a higher-order component in React that memoizes a functional component, preventing unnecessary re-renders. It does this by comparing the previous and current props. If the props haven't changed, React.memo skips the rendering of the component and returns the last rendered result. React.memo performs a shallow comparison of the props. If the props (as shallowly compared using Object.is) have not changed between renders, the component is not re-rendered. If you pass a non primitive data type variable then React memo will not work as expected since when react memo will compare previous value with current value of non primitive(for eg: object) it will be a new reference every time even if value is same, and thus React memo will work properly only with primitive values. 
+
+16) Lazy Loading: 
 
 17) ~ and ^ symbol in package.json: 
 	"react": "^17.0.2" means npm install will install any package between 			17.0.2 and 18.0.0
