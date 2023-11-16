@@ -18,6 +18,8 @@ Functions JS: Functions in JS are a block of statements that can be reused again
 React:
 	React is unidirectional data flow.(Parent to child data flow). Component based architecture(Use 	multiple components). Whenever there is a state change react compares its new dom with previous dom 	and checks for the changes(this process is called reconciliation). This changes it passes to the real 	dom thus saving Real DOM's unneccessary renders thus making it efficeient.
 
+Also other frameworks have prebuilt things and in React, React is a library so you have the freedom to choose from a vast number of other libraries to pair with react. Like redux, formik, antdesign etc. You have the freedom to build your own techstack. 
+
 1) Custom Hook: Encapsulate logic in a custom hook to share it in your components. Just like a function. So you dont have to write one code multiple times you write it in a custom hook and use that custom hook everywhere you need that logic.
 
 2) Server side rendering vs Client side : In client side the server sends an empty shell and the browser performs the render. But in server side rendering the server sends a rendered page thus we see fast loading of the page(the first page load) than client side rendering. Server side is used for data heavy apps like amazon flipkart where SEO performance is also important. And client side for outlook teams etc where SEO is not needed. 
@@ -93,7 +95,7 @@ useEffect(()=>{
 	"react": "^17.0.2" means npm install will install any package between 			17.0.2 and 18.0.0
 	"react": "~17.0.2" means npm install will install any package between 			17.0.2 and 17.9.0
 
-18) Reconciliation in React: 
+18) Reconciliation in React: In React you have a a real dom and virtual dom which is a copy of real dom. So whenever there is a state change we have an updated virtual dom so react checks using the diffing algorithm what minimal changes are required to go from previous state to the current updated state. And then passes these changes only to the real dom. This is Reconciliation.
 
 19) SEO optimization tools : React-snap
 
@@ -103,7 +105,7 @@ useEffect(()=>{
 
 22)Callback Hell:
 
-23)ES6 features
+23)ES6 features:
 
 24) Context vs redux : 
 
@@ -112,3 +114,7 @@ useEffect(()=>{
 28) Lazy Loading
 29) flux vs Redux vs Context
 30) How to Debug code in React:
+
+31) React Fiber: Earlier when react fiber was not present before React16 the diffing algo would block the entire CPU as it was done in only one cycle so if any user clicks on the form or any other user response would be there it would lag or take time for things to happen. So when react fiber came the diffing algo was non cpu blocking as it ran in parts as fibers. So any user actions if present were responsive and wouldnt lag. 
+
+32) Synthetic Event: So in this React manages the events eather than all brwosers managing it separately. React handles all the APIs that are present in the browser. So the benefit is you dont have to write code to handle events for all browsers differently , React will manage these events on its own and then it will pass it to the browser.
