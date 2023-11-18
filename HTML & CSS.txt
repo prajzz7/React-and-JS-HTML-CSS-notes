@@ -10,7 +10,7 @@ CSS
 
 1) CSS specificity : div p { color : red} has specificity 2 because div 1 + p 1 = 2, p {color: red } has specificity 1, #id{ color: red} has specificity of 100, for class has 10
 2) box-sizing : It is a property for sizing a box or a container/element.
-		a) If its border box :- then if container has width 200px and if you give padding inside the 		container say 20px on left and right the total width of container will remain 200px. Since 		padding and border are included in this width
+		a) If its border box :- then if container has width 200px and if you give padding inside the container say 20px on left and right the total width of container will remain 200px. Since padding and border are included in this width
 		b) If it is content-box(even by default without box-sizing property it is content-box) :- 		then if container has width 200px and padding is given 20 px left right then total width of 		container become 240px
 3) CSS variables: They are defined starting with -- for eg: --bgcolor and used as background-color: var(--bgcolor). VAriables defined have scope they can be used in child element but not in parent element. 
 4) CSS selectors : div + p : + represents select immediate next sibling so selected p is sibling to d,

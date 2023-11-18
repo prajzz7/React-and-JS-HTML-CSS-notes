@@ -116,5 +116,21 @@ useEffect(()=>{
 30) How to Debug code in React:
 
 31) React Fiber: Earlier when react fiber was not present before React16 the diffing algo would block the entire CPU as it was done in only one cycle so if any user clicks on the form or any other user response would be there it would lag or take time for things to happen. So when react fiber came the diffing algo was non cpu blocking as it ran in parts as fibers. So any user actions if present were responsive and wouldnt lag. 
+	CHATGPT RESPONSE:
+"React Fiber" refers to the new core algorithm in React, starting from React version 16. It is designed to improve the way React handles the reconciliation of the virtual DOM and how it schedules updates, making React more efficient and responsive.
+
+Before React Fiber, the reconciliation process in React was a recursive and synchronous operation. When a component's state or props changed, React would walk the component tree, updating the virtual DOM and then applying those changes to the actual DOM in a synchronous manner. This approach had some limitations, especially when dealing with large and complex component trees or handling high-frequency updates.
+
+React Fiber introduces a more flexible and efficient architecture by representing the virtual DOM reconciliation process as a set of incremental steps. This allows React to prioritize, pause, and abort the rendering process, making it more adaptable to different performance constraints.
+
+Key features and concepts of React Fiber:
+
+	Incremental Rendering: React Fiber enables incremental rendering, meaning that the rendering work can be broken down into smaller chunks or "fibers." This allows React to prioritize and schedule work in a way that doesn't block the main thread for extended periods, improving the overall application performance.
+
+	Prioritization and Scheduling: React Fiber introduces a priority-based scheduling system. Different types of updates are assigned different priority levels. For example, user interactions might have higher priority than background updates. This helps React to ensure that the most important work is done first.
+
+	Time Slicing: Time slicing is a technique used by React Fiber to break down the rendering work into smaller units and allocate time to each unit. This helps prevent long-running tasks from blocking the main thread, ensuring a smoother user experience.
+
+	Suspense: React Fiber introduces the concept of Suspense, which allows components to "suspend" rendering while they wait for some asynchronous data to load. This helps in handling loading states more elegantly and improving the user experience.
 
 32) Synthetic Event: So in this React manages the events eather than all brwosers managing it separately. React handles all the APIs that are present in the browser. So the benefit is you dont have to write code to handle events for all browsers differently , React will manage these events on its own and then it will pass it to the browser.
