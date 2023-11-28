@@ -15,7 +15,7 @@ CSS
 3) CSS variables: They are defined starting with -- for eg: --bgcolor and used as background-color: var(--bgcolor). VAriables defined have scope they can be used in child element but not in parent element. 
 4) CSS selectors : div + p : + represents select immediate next sibling so selected p is sibling to d,
    div ~ p : selects all sibling which is p
-   div > p : selects Direct children . So p is direct children of div then it will select not if p is nested in some other element which is child of div 
+   div > p : selects all the Direct children . So p is direct children of div then it will select not if p is nested in some other element which is child of div 
 
 5) CSS pseudo selectors : :hover, active, focus, div:not(.list) - select all elements in div except class list
 6) CSS pseudo elements : ::before, after , first-line,last-line, first-letter

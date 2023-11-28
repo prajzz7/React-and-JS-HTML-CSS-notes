@@ -4,6 +4,11 @@ TRAINING : NOV 2021 - MARCH 2022(6HRS WEEKDAY)(Java Springboot React Components)
 BENCH : MARCH 2022 - JULY 2022 
 PROJECT : AUGUST 2022 - MARCH 2023
 BENCH : APRIL 2023 - CURRENT
+
+Tell me about yourself:
+My name is Prajwal Pandeshwar. I have been working in Infosys since the past 2 years now. Initially we were trained in Sprigboot javascript and react and after that I have been working in a React project. That was about maintaing the customer's solar usage data and displaying it on the website.The frontend tech was React and for the state management we have used Redux here so we used the reduxjs toolkit library. From here on I aspire to get equipped with more knowledge, get extremely profieienct in my field also in the future I would like to get my hands on and work in backend as well. Also I have just started teaching partime as a professor teaching HTML CSS JS REAct for Techpaathshala as teaching is also another passion of mine.
+Using REACT 17 in Projects react router dom v6
+
  
 PROJECT : WORKED ON A PROJECT WHERE THEY INSTALL SOLAR PANELS. THEY PROVIDE AND INSTALL SOLAR PANELS FOR CUSTOMERS. Power gazebo is their main product a gazebo with solar panels. Measurements are taken by the team  which visits the client's location does the site survey and then the client gets a quote on the website after logging in. To which after he accepts the installation process starts.Solar Panel installed with iot device. Then the data from the solar panels is stored in the database every 15 mins. And it is fetched and displayed on to the UI of the website. So the client can monitor their solar consumption. And it is displayed in the form of charts. Also on the website you have the history and the product information.
 I worked on the frontend part of it wheere the techstack was REACTJS. Made Login Signup, Profile, Products, Support Tickets, Graph Charts
@@ -363,6 +368,25 @@ Here the third parameter if it is true then it says that event will be executed 
 25) Error Boundaries React: In react whenever something goes wrong, rather than showing a broken UI these Error boundaries are implemented to show a fallback UI to tell the user something is wrong. You make a component for the error boundary and wrap it onto other components if anything goes wrong in these components the error boundary will display a fallback UI to the user indicating what kind of an  error has taken place.
 
 26) Code splitting React: It is a way to optimize the web application's performance by diving the Javascript bundles. Dynamically loading components only when it is needed. So initial load time is significantly reduced. Using React.lazy to asynchronously import components and wrapping it in Suspense component to provide fallback UI until these components are loaded.
+import React, { lazy, Suspense } from 'react';
+
+// Define a component that will be loaded lazily
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+const App = () => {
+  return (
+    <div>
+      <h1>My App</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* Render the lazily-loaded component */}
+        <LazyComponent />
+      </Suspense>
+    </div>
+  );
+};
+
+export default App;
+
 
 
 
