@@ -5,15 +5,10 @@ BENCH : MARCH 2022 - JULY 2022
 PROJECT : AUGUST 2022 - MARCH 2023
 BENCH : APRIL 2023 - CURRENT
 
-Tell me about yourself:
-My name is Prajwal Pandeshwar. I have been working in Infosys since the past 2 years now. Initially we were trained in Sprigboot javascript and react and after that I have been working in a React project. That was about maintaing the customer's solar usage data and displaying it on the website.The frontend tech was React and for the state management we have used Redux here so we used the reduxjs toolkit library. From here on I aspire to get equipped with more knowledge, get extremely profieienct in my field also in the future I would like to get my hands on and work in backend as well. Also I have just started teaching partime as a professor teaching HTML CSS JS REAct for Techpaathshala as teaching is also another passion of mine.
-Using REACT 17 in Projects react router dom v6
+
+
 
  
-PROJECT : WORKED ON A PROJECT WHERE THEY INSTALL SOLAR PANELS. THEY PROVIDE AND INSTALL SOLAR PANELS FOR CUSTOMERS. Power gazebo is their main product a gazebo with solar panels. Measurements are taken by the team  which visits the client's location does the site survey and then the client gets a quote on the website after logging in. To which after he accepts the installation process starts.Solar Panel installed with iot device. Then the data from the solar panels is stored in the database every 15 mins. And it is fetched and displayed on to the UI of the website. So the client can monitor their solar consumption. And it is displayed in the form of charts. Also on the website you have the history and the product information.
-I worked on the frontend part of it wheere the techstack was REACTJS. Made Login Signup, Profile, Products, Support Tickets, Graph Charts
-STATE MANAGEMENT: REDUX TOOLKIT
-
 
 ---------------------- JAVASCRIPT ADVANCED -----------------------------
 
@@ -121,7 +116,7 @@ console.log(calculator.add())
 
 
  
-4) HOISTING : Hoisting is a behaviour of moving all declarations to the top of the scope. If a function is called before definition then function is hoisted to the top of the scope and it still works. If var is defined later and used first it is hoisted to the top of scope and undefined is outputted. But let and const are hoisted but are sent to the temporal dead zones thus giving error. Temporal dead zone is an area where declarations are inaccessible until they are initialized. Only declarations are hoisted and value assignments are not hoisted. Thats why regular functions can be called before declaration and not arrow functions since you assign arrow functions to variables.
+4) HOISTING : Hoisting is a behaviour of moving all declarations to the top of their containing scope. If a function is called before definition then function is hoisted to the top of the scope and it still works. If var is defined later and used first it is hoisted to the top of scope and undefined is outputted. But let and const are hoisted but are sent to the temporal dead zones thus giving error. Temporal dead zone is an area where declarations are inaccessible until they are initialized. Only declarations are hoisted and value assignments are not hoisted. Thats why regular functions can be called before declaration and not arrow functions since you assign arrow functions to variables.
 
 5) let const var: var is hoisted so are let and const but let and const are sent to temporal dead zones. Now the TEMPORAL DEAD ZONE(TDZ) is a concept in JS, so it is the time between the start of the scope and the point where variable is declared, but before its initialized with a value.
 console.log(x); // ReferenceError: x is not defined
@@ -133,7 +128,7 @@ var is functional scope, let and const are block scope.
 
 var and let can be declared and assigned a value and then re-assigned later. const can only be initialezed/assigned a value during declaration you cannot write 
 const a;
-const a =1; 
+
 This is not allowed.
 const a =1 
 This is allowed.
@@ -154,11 +149,18 @@ Also you cant re assign values to const.
 		    	console.log(private_val)
 		    },
 	    setter: function(val){
-			private_val = val
+			private_val = val	
 		    }
 	}
     })
 	Here you cant access private value directly you need getter and setters for it.
+
+function initialize() {
+    b = 2; // No var/let/const, implicitly becomes global
+}
+(function () {
+    var b = 2; // Local to the IIFE, doesn't pollute the global scope
+})();
 
 
 9) SHADOWING: The inner scope variable with the same name as global or outer scope varaible will shadow the outer scope variable and have more priority as the inner scopes value will be printed. if we log in the inner scope.
@@ -185,6 +187,7 @@ Here since it is a deep copy even the nested object's value didnt change.
 But if you use 
 const deepCopy = {...originalObject};
 in the above code this will only make a duplicate of the topmost element and the nested object will be still passed as a reference.
+loadash: _.cloneDeep(obj)
 
 //Shallow copy example
 const shallowCopy = originalObject
@@ -245,7 +248,9 @@ Constructor functions are functions that have this keyword inside them and are c
 	
 	So think of a blank object in place of the this keyword so this keyword refers to the blank object 	that new created and loads the properties inside this object. So thats why its Person1.age. And you get a new object with the properties and methods in Person1 now.
 
-17) Prototype : Prototype is a collection of built in functions and methods that are built in already so you can use on arrays and objects etc. for eg: obj.hasOwnProperty() so hasOwnProperty is predefined function which is a prototype. 
+17) Prototype : Prototype in JavaScript is like a shared set of instructions that objects can use to perform certain tasks.It helps with inheritance as well. Prototype is a collection of built in functions and methods that are built in already so you can use on arrays and objects etc. for eg: obj.hasOwnProperty() so hasOwnProperty is predefined function which is a prototype. 
+obj.hasOwnProperty('key')
+obj.toString()
 
 18) Prototypal Inheritance: A child inherits properties from its parent.
 for eg: var parent = {canWalk: true}; var child = {canCrawl: true}; child.__proto__ = parent; Now child can access canWalk property of parent.
@@ -323,18 +328,29 @@ e)setTimeout(() => {
 
 21) Event Loop : Event loop is the constant process that javascript does to check the callback queue after the call stack is empty. So if a setTimeout or any other asynchronous function is encountered the setTImeout is placed in the callstack now web browser can execute setTimeout directly since setTImeout, fetch request etc are a part of the web browser. And the callback function in it is placed in the callback queue to be executed later. Now if the call stack gets empty the event loop checks the callback queue for functions and if there are callback functions then it places them on the callstack for execution according to their priority i.e. Promise having higher priority would be executed first and then setTimeout or setInterval. Consequently, the Event Loop prioritizes completing all Micro tasks (Promises) in the queue before moving on to the next Macro task (like setTimeout), even if the delay specified in setTimeout is zero. This is the reason Promises are executed before setTimeout. SO promises are in microTask queue and setTimeout are in callback queue.
 
-21) Execution Context: It is an environment that javascript creates, to execute the code and it tells you what variables and functions are available to use by creating a scope chain. Execution context are of two types. Global Execution Context (GEC) and Function Execution Context (FEC). GEC gets created when javscript code first starts to run and it represents global scope in javascript. A function execution context is created whenever a function is called and it has the funcition's local scope. It consists of two phases:
+21) Execution Context: It is an environment that javascript engine creates, to execute the code and it tells you what variables and functions are available to use by creating a scope chain. Execution context are of two types. Global Execution Context (GEC) and Function Execution Context (FEC). GEC gets created when javscript code first starts to run and it represents global scope in javascript. A function execution context is created whenever a function is called and it has the funcition's local scope. It consists of two phases:
 	a) Creation phase: Javascript engine creates an environment. It determines the values for variables and functions and sets up the scope chain for the execution context. 
 	b) Execution phase: The code is executed in this phase.
 So whenever the code is executed for the first time a global execution context is created and a window object is created if its in the browser or global for nodeJs. After this it sets up a memory so all the variables and the function definitions are made available in here before hand for the coe because of hoisting. This was the creation phase. Then comes the execution phase where the code is executed line by line. Now if it comes across any function calls javascript engine now will create a function execution context.  And the same things would apply here as above in the GEC. Once the code returns any value or simple returns/exits from this FEC the FEC will be destroyed from the call stack. Since it was put into the call stack to be executed. So first the GEC was put in the call stack then later if any function call comes up and FEC is created this FEC will be pushed onto the call stack for execution in frames. The call stack operates in a Last-In-First-Out (LIFO) manner. The function at the top of the call stack is the one currently being executed. When a function completes its execution, its context is popped from the stack, and control returns to the previous context.
 
-22) Generators: 
+22) Generators: function* myGenerator() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const generator = myGenerator();
+console.log(generator.next()); // { value: 1, done: false }
+console.log(generator.next()); // { value: 2, done: false }
+console.log(generator.next()); // { value: 3, done: false }
+console.log(generator.next()); // { value: undefined, done: true }
+Generators in JavaScript are a special type of function that allow you to control the execution flow and pause it at certain points.
 
 23) Difference await vs .then(): 
 
 24) Event bubbling: When any element in the DOM structure gets any event such as onClick etc. that event bubbles up to the top most element in the tree i.e the html tag. So if you trigger childs event the event bubbles up and it would also trigger the parents same event if you have an eventhandler for parent. So if child has click event it will trigger parents click event only since only click event is propagated to the top since child has click eventListener. So if parent has any other eventListener other than click that wouldnt be triggered. You can use event.stopPropagation() to stop bubbling up of the event.
 
-24) Event Propogation: Event propagatoin is just like event bubbling. Evenet bubbling keeps executing eventListeners from target element to root element. Event propagation executes eventListeners from root to target. 
+24) Event Propogation: Event propagatoin is just like event bubbling. Event bubbling keeps executing eventListeners from target element to root element. Event propagation executes eventListeners from root to target. 
 
 Eg: FOR UNDERSTANDING 23) and 24) 
 //HTML 
@@ -347,10 +363,10 @@ Eg: FOR UNDERSTANDING 23) and 24)
 //JS
 document.getElementById("inner").addEventListener("click", function() {
   console.log("Inner clicked");
-}, true); // Bubbling phase
+}, true); 
 document.getElementById("outer").addEventListener("click", function() {
   console.log("Outer clicked");
-}, true); // Capturing phase
+}, true); 
 
 document.getElementById("grand").addEventListener("click", function() {
   console.log("Grand clicked");
@@ -364,7 +380,7 @@ Here the third parameter if it is true then it says that event will be executed 
 24) Synthetic Event: 
 
 
-
+24) for each vs for of vs for in
 25) Error Boundaries React: In react whenever something goes wrong, rather than showing a broken UI these Error boundaries are implemented to show a fallback UI to tell the user something is wrong. You make a component for the error boundary and wrap it onto other components if anything goes wrong in these components the error boundary will display a fallback UI to the user indicating what kind of an  error has taken place.
 
 26) Code splitting React: It is a way to optimize the web application's performance by diving the Javascript bundles. Dynamically loading components only when it is needed. So initial load time is significantly reduced. Using React.lazy to asynchronously import components and wrapping it in Suspense component to provide fallback UI until these components are loaded.
@@ -427,7 +443,7 @@ In this example, the click event is delegated to the ul element, and the event t
 const numbers = [1, [2, 3], 4, 5];
 
 // Destructuring the nested array
-const [first, [second, third], fourth, fifth] = numbers;
+  const [first, [second, third], fourth, fifth] = numbers;
 
 eg:
 var arr = [1,2,3,[4,5,[6,7],8],9,10]
@@ -440,12 +456,58 @@ console.log(c)
 
 39) When to use arrow vs regular fn:
 
-40) Why use Constructor functions: We use constructor function when we need multiple objects to have same properties or methods. 
+40) Why use Constructor functions: We use constructor function when we need multiple objects to have/share same properties or methods. 
+
+41) How fetch works under the hood, AJAX calls, character limitations in api calls.
+
+42) Challenges faced in web developemnt and how did I overcame them.
+
+43) windowing (to fetch only that much data that is needed on the screen)
 
 
+44) Ensure cross-browser and cross-device compatibility by conducting thorough testing and troubleshooting:
+	Browser Testing,Mobile responsive testing, forms buttons and all user interactions working correctly check. Use online testing services such as BrowserStack(they use tools like selenium) or CrossBrowserTesting. Use polyfills for missing functionalities in older browsers
 
+45)Document technical specifications and maintain project documentation:
+	
+46)Experience with responsive and mobile-first design principles:
+	The majority of internet users access websites through mobile devices. 	Improved SEO: Google and other search engines prioritize mobile-friendly websites in search results. Design with touch interactions in mind, using larger touch targets and avoiding hover-dependent interactions. Begin designing for mobile devices first.Use media queries to progressively enhance styles and layouts for larger screens. Design with touch interactions in mind, using larger touch targets and avoiding hover-dependent interactions.Avoid Fixed Widths.
 
+47)Solid understanding of web performance optimization techniques:
 
+48)Knowledge of UI/UX design principles and the ability to collaborate effectively with designers:
+
+49)Attention to detail and a commitment to delivering high-quality code:
+	Use semantics rather than divs so it imporoves SEO and overall readability. Organize CSS structure properly use meaningful class names and id names. Have responsive design.  Use meaningful variable and function names, follow a consistent coding style, and avoid unnecessary global variables. Add comments to explain complex sections of your code. Document your code to make it easier for others (and yourself) to understand. In a real-world scenario, you might want to use build tools like Webpack or Gulp to automate the minification and compression process during development and deployment. Use destructured object names instead of just props.objectName
+
+50)Excellent communication and time management skills:
+	Being transparent about even the  little details that I am working on and facing issues in ise better. Because when you be transparent somebody could tell you if you are doing a mistake somewhere. Take active Feedback on your work, so you develop yourself.
+	Regularly reassessing project timelines taking on what has higher priority and completing it and adapting to changing requirements ensured that the team consistently met or exceeded expectations.
+
+51)Optimize web pages or applications for maximum speed and scalability: 
+	Combine multiple classes with the same styles. Lazy loading
+
+52)what is webkit in code.
+
+53) Achievements in 2 years of development career: 
+
+54) OPtimize SEO: 	
+	Meta Descriptions:
+Write compelling meta descriptions that summarize the content of each page. Include relevant keywords and encourage clicks.
+	SEO-Friendly URLs:
+Create descriptive and SEO-friendly URLs. Include relevant keywords and keep URLs short and readable.
+	Semantic HTML:
+Use semantic HTML tags to structure your content logically. Search engines favor well-organized, semantically marked-up content.
+	Image Alt Text:
+Include descriptive alt text for images to improve accessibility and provide context to search engines.
+	 Mobile Optimization:
+Ensure your website is mobile-friendly. Google prioritizes mobile-friendly websites in search results.
+	- Create a `robots.txt` file to guide search engine crawlers and submit a `sitemap.xml` file to search engines to help them index your pages.
+	
+55) use strict : 'use strict'
+undeclaredVariable = "Hello";
+console.log(undefined, undeclaredVariable)
+Undeclared variable will give an error since it is not declared with var,let,const.
 ---------------------All functions----------------------
 Array Methods:
 
@@ -460,7 +522,9 @@ splice()
 map()
 filter()
 reduce()
-forEach()
+forEach() - Cannot be used to break out of the loop (e.g., using break).But index available
+for in - for object keys
+for of - The index of the current element is not directly available (you need to use additional variables).
 every()
 some()
 find()
@@ -468,6 +532,7 @@ indexOf()
 lastIndexOf()
 sort()
 reverse()
+includes()
 String Methods:
 
 charAt()
@@ -545,7 +610,9 @@ AJAX Methods (XMLHttpRequest or Fetch API):
 fetch()
 XMLHttpRequest.open()
 XMLHttpRequest.send()
-XMLHttpRequest.onreadystatechange()
+XMLHttpRequest.onreadystatechange=function(){}
+XMLHttpRequest.onprogress=function(){}
+XMLHttpRequest.onload=function(){}
 JSON Methods:
 
 JSON.parse()
@@ -584,10 +651,15 @@ a) Promise.all : It returns a new promise that resolves when all promises are fu
 b) Promise.race: It returns a promise that settles as soon as one promise settles, whether it's fulfilled or rejected. This is useful when you're interested in the fastest promise
 c) Promise.allSettled: It returns a promise that settles when all promises have settled, regardless of whether they're fulfilled or rejected. This is beneficial when you need to know the outcome of all promises. The downside, however, is that you'll need additional processing to distinguish between the resolved and rejected promises, as Promise.allSettled doesn't inherently differentiate between the two.
 
+2)How does AJAX work: 
+
+3) How does fetch work BTS:
+
+
 ---------------- VANILLA JAVASCRIPT DOM ----------------
 
 1)var element = document.getElementById
-2)document.getElementsByClassName('some-class-name')
+2)const class = document.getElementsByClassName('some-class-name') //returns Nodelist of all classes so convert to array to access through for each or just access like- class[0] class[1]. 
 3)document.getElementsByTagName('li')
 4) var lastItem = document.querySelector('#list-group-item:last-Child');
 5) var secondItem = document.querySelector('.list-group-item:nth-child(2)');
@@ -597,7 +669,7 @@ document.querySelectorAll('input[type="text"]')
 element.innerHTML = ""
 element.innerText
 element.style.borderBottom
-element.textContent0
+element.textContent
 
 element.parentNode.style.backgroundColor = '#f4f4f4'
 element.parentElement.style
@@ -609,11 +681,12 @@ eleement.nextElementSibling
 element.previousElementSibling
 
 var newDiv = document.createElement('div')
-newDiv.className = 'helloClass'
+newDiv.className = 'helloClass hlloCLass1 helloClass2'
+newDiv.classList.add('yourClassName','class2','class3');
 newDiv.id = 'helloId'
 var newDivText = document.createNodeText('Hello wOrld')
 newDiv.appendChild(newDivText)
-var container = docyument.querySelector('header .container')
+var container = document.querySelector('header .container')
 var h1 = document.queryselector('header h1')
 container.insertBefore(newDiv, h1)
 
@@ -628,17 +701,3 @@ element.appendChild(genderRadio)
 
 
 
-
-REACT 
-
-const emailReducer = (state, action) => {
-	if(action.type==='UPDATE_EMAIL'){
-		return { val: action.payload, isValid:true}
-}
-}
-
-CONST [emailState, dispatchEmail] = usereducer(emailreducer, defaultState)
-
-function onEmailChange(e){
-dispatchEmail({type:'UPDATE_EMAIL', payload: e.target.value})
-}

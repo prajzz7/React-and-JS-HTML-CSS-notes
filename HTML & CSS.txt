@@ -29,3 +29,13 @@ CSS
 			      ul li[data-foodType^='veg']{ color: red } -> ^ means every attribute that 									     starts with veg
 			      ul li[data-foodType*='veg']{ color: red } -> * means every attribute that 									     contains veg
 									   $ means every attribute that 									     ends with veg
+
+9) Flex: example-
+Flex-basis:150px /*if given of box1 Width of that box1 will override if width given before this*/
+/*Flex basis gives width 150px fixed to the element, so imagine we gave flex-basis 150px to both boxes. Now, */
+Flex-grow: 1; /*on box1 will give up remaining space outside boxes to box1*/
+Flex-shrink: 2 /* when screen size shrinks the box shrinks in the ratio of flex-shrink given to them. If box-1 has flex-shrink:2 box-2 has flex-shrink:1, box-1 will shrink twice faster than box-1.
+
+So flex:1 2 150px is same as above, i.e. flex-basis will give fixed width 150px and after that the remaining space will be used for flex-grow. And if you set flex-basis to 0 the entire space will be distributed according to flex-grow. SO if box 1 has flex-grow 10 and box 2 has flexgrow 2, all of the space will be distributed in 10:2 ratio to box1 and box2.
+Now, if box1 has flex-shrink 2 and box2 has flex-shrink 1 and if screensize is 300px and both boxes have flex-basis(width) 150px so if you decrease the screen size even more from 300px the boxes will shrink so box1 will shrink twice the size as box1 since box1 has flex-shrink2 and box has flex-shrink1
+

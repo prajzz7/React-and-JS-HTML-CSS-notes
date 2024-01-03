@@ -21,6 +21,40 @@ React:
 Also other frameworks have prebuilt things and in React, React is a library so you have the freedom to choose from a vast number of other libraries to pair with react. Like redux, formik, antdesign etc. You have the freedom to build your own techstack. 
 
 1) Custom Hook: Encapsulate logic in a custom hook to share it in your components. Just like a function. So you dont have to write one code multiple times you write it in a custom hook and use that custom hook everywhere you need that logic.
+import { useState } from 'react';
+
+// Custom hook for managing a counter
+function useCounter(initialValue = 0, step = 1) {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => {
+    setCount(count + step);
+  };
+
+  const decrement = () => {
+    setCount(count - step);
+  };
+
+  return {
+    count,
+    increment,
+    decrement,
+  };
+}
+
+export default useCounter;
+//Main Component
+function CounterComponent() {
+  const { count, increment, decrement } = useCounter(0, 2);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+}
 
 2) Server side rendering vs Client side : In client side the server sends an empty shell and the browser performs the render. But in server side rendering the server sends a rendered page thus we see fast loading of the page(the first page load) than client side rendering. Server side is used for data heavy apps like amazon flipkart where SEO performance is also important. And client side for outlook teams etc where SEO is not needed. 
 
@@ -32,7 +66,7 @@ Also other frameworks have prebuilt things and in React, React is a library so y
 
 6) Controlled vs uncontrolled component: Whenever you use Forms with state it is controlled and you extract data using the onChange handler and perform validations, there is no internal state for input since ref is not present. Whereas in uncontrolled it is reliable on dom to handle input and not state, you can extract the value of input using ref, here state is not managing the data but ref is present and input tag manages its internal state and not component state. Eg: If you use useRef which is uncontrolled, for a search field it will fetch values but wont re render the component, so you will have to manage a state to trigger a re render to change somethgin in UI or run a function on the re render.
 
-7) PRos and cons of class vs functional components react:  SO there is better code Reusability. For eg you can reuse state logic in multiple places. No boiler plate code like state for eg .this binding .
+7) PRos and cons of class vs functional components react:  SO there is better code Reusability. For eg you can reuse state logic in multiple places. No boiler plate code like state for eg .this binding.
 
 8) React Middleware: A MIddleware intercepts actions and can perform asynchronous tasks and handles actions dispatched from the components. So, Redux Thunk is a middleware that enables you to create action creators that handle asynchronous operations, making it a powerful tool for managing side effects in Redux-based applications.  So you have action creators  to write asynchronous pieces of code since you shouldnt write it in the reducers and dispatch actions from inside these.We can dispatch actions fom components as well but We use middleware if we have api calls or any asynchronous code and according to that if we want to dispatch actions. 
 --Here's how it works step by step:
@@ -45,16 +79,18 @@ Inside this function, you can perform asynchronous operations (e.g., API request
 When those asynchronous operations are complete, you can dispatch one or more actual action objects (plain objects) from within this function.
 These dispatched action objects then continue through the middleware chain and reach the reducers, where they update the state.
 
-9) Stateful vs stateless with examples: Class are stateful since they have their own state. Functional components were stateless initially since they get data through props and props are read only and cannot manage their own state. But with the intro of hooks functional components cna also be stateful since state can be managed with the help of hooks.
+In redux sagas you dont need to use .next on generator function redux saga takes care of it.
+
+9) Stateful vs stateless with examples: Class are stateful since they have their own state. Functional components were stateless initially since they get data through props and props are read only and cannot manage their own state. But with the intro of hooks functional components can also be stateful since state can be managed with the help of hooks.
 
 10) What are side effects in react explain with example: Anything that is not in the component or not affecting the component state is a side effect. state setState is not a sideEffect. But changing document.title, fetch api calls, subscribing to any service are side effect examples and they are preferrably written inside useEffect.
 
-11)When we save data in a state why is it lost after we ref resh the page: The state data is stored in memory within the browser's JavaScript runtime environment.
+11)When we save data in a state why is it lost after we refresh the page: The state data is stored in memory within the browser's JavaScript runtime environment.
 This storage is volatile, meaning it is cleared when the page is refreshed
 
 
 Radio button value react
-12) Higher order components: The components that take other components as arguments and return a component. Used for code reusability
+12) Higher order components: The components that take other components as arguments and return a component. Used for code reusability. for eg; Wrap authentication logic in a componetn and pass the authenticated components to it if user if authenticated show this component otherwise show that 'you need to be authenticated to access this component'. We use HOC so multiple authenticated components dont need same logic written in their componetns just keep this similar logic in one place and pass the component to it.
 
 13) useMemo: When you have a function in a component and you dont want that function to re render on every component re render then you use this useMemo. Also the function that you pass in useMemo is cached so the next time the component re renders useMemo will check if the value is changed or not, if its not changed then it will return the value from the cached function instantaneously without actually running the function since the value was cached and otherwise if the value is changed the function in useMemo will be executed normally with howmuchever time it takes.
 const doubleNum = useMemo(()=>{
@@ -74,7 +110,7 @@ useEffect(()=>{
 },[themeStyle])
 
 And you want to console.log('Theme changed') used  in useEffect wheneever user clicks on Change theme button which setStates the theme to the opposite i.e. if its white then turn dark if its dark then turn white. So if you have another separate function that re renders the component this theme styles object will get created again since the component re-rendered so this code will run and since themeStyle is an object so it is a non-primitve/refrential value so it will be a new object on a re-render since it will reference a new memory location now, and thus it will console.log even if the theme hasnt changed since we passed themeStyle object in useEffects dependecy. So you use useMemo in this case to show the component that even if you have re rendered the themeStyles value is still same and not explicitly changed so you wrap this themeStyle object with useMemo. note that if themeStyle would use String, number or an primitive value it would be the same as previous render and wouldnt need useMemo since primitive value are same and do not change on re renders like non primitve values as they have a new reference everytime the y are created even if the object is same. So now the code will look like,
-const themeStyle = useMemo(()=>{
+const themeStyle = useMemo(()=>{ 
 	return {
 		bgColor: dark?'black':'white'
 		}
@@ -85,7 +121,7 @@ useEffect(()=>{
 
 
 
-14) useCallback: It is the same as useMemo. THe only difference is that in useMemo's callback we return a value and in useCallback we return the entire callback function to execute it at any later point in time. So if we want to use that particuklar function somewhere else or pass it as props to another component we ll use useCallback and if we just want the value we use useMemo like in the above example in 13)useMemo's example we are returning just the object to themeStyles but if we would have used useCallback there instead of useMemo we would have a function in themeStyles instead of just the object. 
+14) useCallback: So what happens is suppose you have a component which has a child component and is passing a function to the child component. And that child component is wrapped with useMemo. So when the parent re renders the child will also re render but since the child is wrapped in React.memo() it wont re render unless the props change. But we are passign a fucntion as a prop which will always be different on every re render since fucntion is a referential value. Now to prevent the child from rerendering we have to make this function in parent that we pass as props to be the same everytime while passing it down to the child so child wont re render. So we wrap this function in usecallback, so this function now is same eveytime we pass it down to the child since we wrapped this function in useCallback. What useCallback does is it freezes the function so it is the same on every re render. And the function will only change when the dependency array value changes. If the dependency value is still the same as the last render then the function will stay the same and the child component will not re-render, and only if this dependency value of the useCallback changes only then the function will act as a new function while being passed down to the child component and the the child component will re render since it is a new function.
 
 15) React.Memo: React.memo is a higher-order component in React that memoizes a functional component, preventing unnecessary re-renders. It does this by comparing the previous and current props. If the props haven't changed, React.memo skips the rendering of the component and returns the last rendered result. React.memo performs a shallow comparison of the props. If the props (as shallowly compared using Object.is) have not changed between renders, the component is not re-rendered. If you pass a non primitive data type variable then React memo will not work as expected since when react memo will compare previous value with current value of non primitive(for eg: object) it will be a new reference every time even if value is same, and thus React memo will work properly only with primitive values. 
 
@@ -97,9 +133,92 @@ useEffect(()=>{
 
 18) Reconciliation in React: In React you have a a real dom and virtual dom which is a copy of real dom. So whenever there is a state change we have an updated virtual dom so react checks using the diffing algorithm what minimal changes are required to go from previous state to the current updated state. And then passes these changes only to the real dom. This is Reconciliation.
 
-19) SEO optimization tools : React-snap
+Here's a simplified overview of how React's reconciliation works:
+
+Render Virtual DOM:
+
+Whenever a component's state or props change, React re-renders the component and generates a new virtual DOM tree.
+The virtual DOM is a lightweight copy of the actual DOM, represented as a tree of React elements.
+Diffing:
+
+React performs a process called "diffing" by comparing the new virtual DOM tree with the previous one.
+It does this by recursively comparing the elements in the new tree with the elements in the old tree, looking for differences.
+Element-level Diffing:
+
+React uses a few key strategies for efficient element-level diffing:
+Keyed Reconciliation: React relies on "keys" to determine whether two elements in different renders are the same. Keys should be unique among sibling elements.
+Element Type Comparison: React compares the types of elements (e.g., div, span) to determine if they are the same.
+Keyed Children Diffing: When rendering lists of elements, React efficiently updates the list by matching and updating elements based on keys.
+Reconciliation Strategy:
+
+React employs a heuristic algorithm to determine the most efficient way to update the actual DOM. It aims to minimize the number of operations needed to transform the old virtual DOM tree into the new one.
+The reconciliation algorithm tries to make the process as efficient as possible by avoiding unnecessary updates and minimizing the DOM manipulations.
+Update Actual DOM:
+
+Once React determines the differences between the old and new virtual DOM trees, it applies the necessary updates to the actual DOM. This update process is often batched and optimized for performance.
+
+19) SEO optimization tools : React-snap, React helmet
+SEO, which stands for Search Engine Optimization, involves strategies and techniques aimed at improving a website's visibility on search engines. The processes of indexing and ranking are crucial aspects of SEO.
+
+1. Indexing:
+Definition: Indexing refers to the process by which search engines collect, store, and organize information from web pages. When a search engine indexes a page, it essentially adds that page to its database, making it available for retrieval in response to user queries.
+How it Works: Search engine crawlers (also known as spiders or bots) systematically browse the web, following links from one page to another. During this crawling process, they analyze and index the content of each page they encounter.
+Importance: Proper indexing ensures that a webpage's content is included in a search engine's database and can be presented in search results when relevant queries are made.
+2. Ranking:
+Definition: Ranking refers to the position of a webpage in the search engine results pages (SERPs) for a particular query. Search engines use complex algorithms to determine the relevance and quality of a webpage's content in relation to a user's search query.
+Factors Affecting Ranking:
+Relevance: How well the content of a page matches the user's search query.
+Authority: The perceived credibility and authority of the website and its content.
+User Experience: Factors such as page load speed, mobile-friendliness, and overall user experience.
+Backlinks: The quantity and quality of links pointing to the page from other websites.
+Content Quality: The depth, originality, and value of the content on the page.
+Importance: Higher rankings mean better visibility, and users are more likely to click on links that appear at the top of the search results. Websites that consistently provide relevant, high-quality content are rewarded with better rankings.
+3. SEO Strategies for Indexing and Ranking:
+Keywords: Use relevant keywords in your content that users are likely to search for.
+Quality Content: Create high-quality, informative, and engaging content that satisfies user intent.
+Technical SEO: Optimize technical aspects such as site speed, mobile responsiveness, and proper HTML markup.
+Link Building: Acquire high-quality backlinks from reputable sources to build authority.
+User Experience: Prioritize a positive user experience with easy navigation and clear calls-to-action.
+4. Monitoring and Adjusting:
+Regularly monitor your website's performance in search results using tools like Google Analytics and Google Search Console.
+Adjust your SEO strategy based on performance data, user behavior, and changes in search engine algorithms.
 
 20) Security in React: Dom Purify against XSS attacks.
+a) Content Security Policy (CSP):
+What is CSP?
+
+CSP is a security standard that helps prevent common types of web vulnerabilities, particularly Cross-Site Scripting (XSS) attacks.
+It allows web developers to declare the permitted sources of content that browsers should execute or load on a web page.
+By defining a policy, you can control where resources like scripts, styles, images, and other types of content can be loaded from.
+How to Implement CSP:
+
+CSP is typically implemented using an HTTP header or a meta tag in the HTML document.
+Here's an example of setting up a simple CSP in the HTML file:
+<!-- Example of setting up a Content Security Policy in the HTML file -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://trusted-scripts.com">
+default-src: Specifies the default source for content if not explicitly specified by other directives.
+script-src: Defines valid sources for JavaScript.
+
+b) Cross-Site Request Forgery (CSRF):
+What is CSRF?
+
+CSRF is an attack where a malicious website tricks a user's browser into performing actions on another website where the user is authenticated.
+It typically involves an attacker inducing a victim to unknowingly submit a request on a site where they are authenticated.
+Prevention Techniques:
+
+Anti-CSRF Tokens:
+Include a unique anti-CSRF token in each form or request.
+The server validates the token to ensure that the request is legitimate.
+Example in a React component:
+axios.post('/api/submit-data', { data: 'someData' }, { headers: { 'X-CSRF-Token': csrfToken } });
+
+SameSite Cookies:
+Set the SameSite attribute for cookies to restrict when they are sent in a cross-site request.
+It prevents cookies from being sent with requests initiated by third-party websites.
+// Example of setting SameSite attribute for cookies
+Set-Cookie: sessionid=123; SameSite=Lax; Secure;
+
+c) JWT tokens.
 
 21) Babel:
 
@@ -110,7 +229,21 @@ useEffect(()=>{
 24) Context vs redux : 
 
 25) useStrict mode:
-27) Suspense
+
+27) Reducer:
+	const emailReducer = (state, action) => {
+	if(action.type==='UPDATE_EMAIL'){
+		return { val: action.payload, isValid:true}
+}
+}
+
+CONST [emailState, dispatchEmail] = usereducer(emailreducer, defaultState)
+
+function onEmailChange(e){
+dispatchEmail({type:'UPDATE_EMAIL', payload: e.target.value})
+}
+
+
 28) Lazy Loading:
 29) flux vs Redux vs Context
 30) How to Debug code in React:
@@ -143,10 +276,13 @@ Key features and concepts of React Fiber:
 	d) Avoid unneccessary re-renders: use useMemo & useCallback
 	e) Check if you can have state locally rather than in store centrally. Since local state updates will always be faster.
 	f) React.Fragment on outside instead of div: react fragment save creating the dom nodes as if it would create if oyu write div instead of react fragment.
+	g) Lazy loading.
 
-34) Crossbrowser compatability: Test across all browsers, Normalize.css import in css file to reset styles, check documentation for compatability, use fallback elements in case it fails. font-family: 'Open Sans', Arial, sans-serif; 'Open Sans' is the preferred font.
+34) Crossbrowser compatability: Test across all browsers, Normalize.css import in css file to reset styles cuz different browsers might have different stlying by default, check documentation for compatability, use fallback elements in case it fails. font-family: 'Open Sans', Arial, sans-serif; 'Open Sans' is the preferred font.
 Arial is the fallback font.
 sans-serif is the generic font family that will load when neither of above loads.
 
 35) Search Engine Optimization (SEO): a) Install react helmet async library. Wrap App component with Helmet Provider Component. Add data-rh =true in meta tag index.html. Now you can configure Hemlet component on each individual page. So every route/ every page will have a meta tag(title, name , url) associated with it rather than having a single meta tag in index.html. You can use title, meta and link tags in this Helmet component in every page. So every page gets its own title and description when the google web crawler crawls for page data. b) sitemap.txt is a file where all your url in your website are kept i.e. the routes your website has. Register your site on google search console and add your sitemap too so this will show your individual page rankings and the sites and routes/pages of your websites that have been crawled.
+
+36) Difficulty in 2 years of development: Arrow functions this and hoisting problem and this context lost when passed as reference, optimizing problem, ALSO sometimes in the sprints I wouldnt understand how much time a certain feature would require so i wouldnt prioritize things and would just simply work and sleep and somtimes some features took way much more time than I expected. So then I would prioritise things make a schedule if I go over the schedule I would not sleep and complete it first.
 
