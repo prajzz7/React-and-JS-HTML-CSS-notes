@@ -1,14 +1,4 @@
-JOINED : 27 SEPT 2021
-ONBOARDING FOR A MONTH
-TRAINING : NOV 2021 - MARCH 2022(6HRS WEEKDAY)(Java Springboot React Components)
-BENCH : MARCH 2022 - JULY 2022 
-PROJECT : AUGUST 2022 - MARCH 2023
-BENCH : APRIL 2023 - CURRENT
 
-
-
-
- 
 
 ---------------------- JAVASCRIPT ADVANCED -----------------------------
 
